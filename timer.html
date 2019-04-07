@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1" />
+    <title>番茄工作法-ayan</title>
+    <script src="js/belowie9.js"></script>
+    <script src="js/ayan-alpha.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333399;
+            font-weight: bold;
+            user-select: none;
+        }
+
+        body {
+            background: #FFCC33;
+        }
+
+        .container {
+            display: block;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        @media screen and (max-width:600px) {
+            .container {
+                width: 100%;
+            }
+        }
+
+        .header,
+        .main {
+            display: block;
+            width: 100%;
+        }
+
+        .header {
+            padding-top: 100px;
+        }
+
+        #time {
+            font-size: 50px;
+            text-align: center;
+        }
+
+        input {
+            background: #FF0033;
+            color: #FFCC33;
+            border: none;
+            padding: 4px 10px;
+            font-size: 20px;
+            width: 80px;
+            outline: none;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto 20px;
+            box-shadow: none;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .label {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        button {
+            border: none;
+            color: #FFCC33;
+            background: #333399;
+            padding: 10px;
+            font-size: 14px;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            outline: none;
+            transition: 1s;
+        }
+
+        button:active {
+            padding: 20px;
+        }
+
+        #mark {
+            position: fixed;
+            background: #000;
+            opacity: 0.5;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: none;
+        }
+
+        #tip {
+            position: fixed;
+            display: none;
+            height: 90px;
+            width: 70%;
+            top: 40%;
+            left: 15%;
+            background: #FF0033;
+            border-radius: 5px;
+            overflow: hidden;
+            color: #FFCC33;
+            text-align: center;
+            line-height: 95px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mark">
+    </div>
+    <div id="tip">Tip!</div>
+    <div class="container">
+        <div class="header">
+            <p id="time">00:00:00</p>
+        </div>
+        <div class="main">
+            <p class="label">工作时间：</p><input type="number" id="getWork" value="25"></input>
+
+            <p class="label">休息时间：</p><input type="number" id="getRest" value="5"></input>
+            <button id="work">开始工作</button>
+            <button id="rest">开始休息</button>
+            <button id="stop">取消</button>
+            <button id="now">查看当前时间</button>
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+
+    <script>
+        Ayan.use(function (base, ex) {
+            var util = base.util
+
+            /**
+             * 传入被修改的元素
+             * @example
+             * var date = new Timer("#time") 
+             */
+            var Timer = function (elem) {
+                this.element = ex.sel(elem);
+                this.timer = null;
+                this.timerAction = false;
+            }
+
+            Timer.prototype = {
+                dateTool: util.date,
+                formatNum: function (number) {
+                    if (number < 10) {
+                        return '0' + number
+                    }
+
+                    return number
+                },
+                tip: function (msg) {
+
+                    var mark = ex.sel("#mark")
+                    var tip = ex.sel("#tip")
+                    tip.innerHTML = msg
+                    tip.style.display = "block"
+                    mark.style.display = "block"
+                },
+                /**
+                 * 运行定时器 
+                 * 
+                 */
+                actionTime: function (time, msg) {
+                    if (!this.timerAction) {
+                        this.timerAction = true
+                    } else {
+                        clearInterval(this.timer)
+                    }
+                    var _this = this;
+                    var time = Math.abs(parseFloat(time));
+
+
+                    var time_str,
+                        second,
+                        h,
+                        m,
+                        s;
+
+                    if (!util.lang.isNumber(time)) {
+                        util.error('请传入正确的时间类型,time is not a number')
+                    }
+
+                    second = time * 60;
+
+                    this.timer = setInterval(function () {
+                        if (second <= 0) {
+                            if(msg){
+                                _this.tip(msg);
+                            }
+                            _this.element.innerHTML = "00:00:00"
+                            clearInterval(_this.timer)
+                            this.timerAction = false;
+                            return
+                        }
+
+                        h = second / 60 / 60
+                        if (h >= 1) { m = (second / 60) % 60 }
+                        else {
+                            m = second / 60
+                        }
+                        s = Math.round(((second / 60) - Math.floor(second / 60)) * 60)
+
+                        time_str = _this.formatNum(Math.floor(h)) + ":" + _this.formatNum(Math.floor(m)) + ":" + _this.formatNum(s)
+
+                        _this.element.innerHTML = time_str
+                        second--;
+                    }, 1000)
+                },
+                /**
+                 * 查询当前时间,暂时废弃
+                 */
+                queryTime: function () {
+                    var _this = this;
+                    clearInterval(this.timer);
+                    this.timer = setInterval(function () {
+                        _this.element.innerHTML = _this.dateTool.format("HH:mm:ss")
+                    }, 1000)
+                },
+                /**
+                 * 更新当前时间 
+                 * @param any 数字或字符串形式
+                 */
+                updateTime: function (any, msg) {
+                    clearInterval(this.timer);
+                    this.actionTime(any, msg);
+                },
+                /**
+                 * 重置时间
+                 */
+                resetTime: function () {
+                    clearInterval(this.timer);
+                    this.actionTime(0);
+                },
+            }
+
+            base.ready(function () {
+                document.body.addEventListener('touchstart', function () { });
+                if (localStorage.getItem('workTime')) {
+                    ex.sel("#getWork").value = localStorage.getItem('workTime');
+                }
+
+                if (localStorage.getItem('restTime')) {
+                    ex.sel("#getRest").valuegetRestTime = localStorage.getItem('restTime');
+
+                }
+            })
+
+            base.ready(function () {
+                var timer = new Timer("#time");
+
+                let timerControlFactory = function (elem1, fn) {
+                    fn = fn || function () { };
+                    ex.sel(elem1).addEventListener('click', function (e) {
+                        fn(e);
+                    }, false)
+                }
+
+
+                timerControlFactory("#mark", function (e) {
+                    ex.sel("#tip").style.display = "none"
+                    ex.sel("#mark").style.display = "none"
+                })
+
+
+                timerControlFactory("#work", function (e) {
+                    var getWorkTime = parseFloat(ex.sel("#getWork").value)
+                    timer.updateTime(getWorkTime, "工作时间: " + getWorkTime + " 分钟，结束")
+                    localStorage.setItem('workTime', getWorkTime)
+                })
+                timerControlFactory("#rest", function (e) {
+                    var getRestTime = parseFloat(ex.sel("#getRest").value)
+                    timer.updateTime(getRestTime, "休息时间: " + getRestTime + " 分钟，结束")
+                    localStorage.setItem('restTime', getRestTime)
+                })
+                timerControlFactory("#stop", function (e) {
+                    timer.resetTime();
+                })
+                timerControlFactory("#now", function (e) {
+                    timer.queryTime();
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
