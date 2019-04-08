@@ -107,21 +107,26 @@ Ayan.use(function (base, ex) {
     }
 
     base.ready(function () {
+
         document.body.addEventListener('touchstart', function () { });
-        if (localStorage.getItem('workTime')) {
-            ex.sel("#getWork").value = localStorage.getItem('workTime');
-        }
+        
+        if(localStorage){
+            if (localStorage.getItem('workTime')) {
+                ex.sel("#getWork").value = localStorage.getItem('workTime');
+            }
 
-        if (localStorage.getItem('restTime')) {
-            ex.sel("#getRest").valuegetRestTime = localStorage.getItem('restTime');
+            if (localStorage.getItem('restTime')) {
+                ex.sel("#getRest").valuegetRestTime = localStorage.getItem('restTime');
 
+            }
         }
+        
     })
 
     base.ready(function () {
         var timer = new Timer("#time");
 
-        let timerControlFactory = function (elem1, fn) {
+        var timerControlFactory = function (elem1, fn) {
             fn = fn || function () { };
             ex.sel(elem1).addEventListener('click', function (e) {
                 fn(e);
