@@ -80,7 +80,7 @@ Ayan.use(function (base, ex) {
             }, 1000)
         },
         /**
-         * 查询当前时间,暂时废弃
+         * 查询当前时间
          */
         queryTime: function () {
             var _this = this;
@@ -123,36 +123,37 @@ Ayan.use(function (base, ex) {
         
     })
 
+    function timerControlFactory (elem1, fn) {
+        fn = fn || function () { };
+        ex.sel(elem1).addEventListener('click', function (e) {
+            fn(e);
+        }, false)
+    }
+
     base.ready(function () {
         var timer = new Timer("#time");
-
-        var timerControlFactory = function (elem1, fn) {
-            fn = fn || function () { };
-            ex.sel(elem1).addEventListener('click', function (e) {
-                fn(e);
-            }, false)
-        }
-
 
         timerControlFactory("#mark", function (e) {
             ex.sel("#tip").style.display = "none"
             ex.sel("#mark").style.display = "none"
         })
 
-
         timerControlFactory("#work", function (e) {
             var getWorkTime = parseFloat(ex.sel("#getWork").value)
             timer.updateTime(getWorkTime, "工作时间: " + getWorkTime + " 分钟，结束")
             localStorage.setItem('workTime', getWorkTime)
         })
+
         timerControlFactory("#rest", function (e) {
             var getRestTime = parseFloat(ex.sel("#getRest").value)
             timer.updateTime(getRestTime, "休息时间: " + getRestTime + " 分钟，结束")
             localStorage.setItem('restTime', getRestTime)
         })
+
         timerControlFactory("#stop", function (e) {
             timer.resetTime();
         })
+
         timerControlFactory("#now", function (e) {
             timer.queryTime();
         })
