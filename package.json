@@ -1,0 +1,48 @@
+{
+  "name": "ayan-timer",
+  "version": "0.1.0",
+  "author": "ayan0312 <ayan0312000@outlook.com>",
+  "description": "a tomato timer",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --colors",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js --watch --colors",
+    "test": "mocha"
+  },
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/ayan0312/ayanTimer/issues"
+  },
+  "repository": "https://github.com/ayan0312/ayanTimer.git",
+  "license": "MIT",
+  "dependencies": {
+    "balloon-css": "^0.5.0",
+    "promise-polyfill": "^8.1.0",
+    "smoothscroll": "^0.4.0"
+  },
+  "devDependencies": {
+    "art-template": "^4.13.2",
+    "art-template-loader": "^1.4.3",
+    "autoprefixer": "^9.5.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "mini-css-extract-plugin": "^0.7.0",
+    "mocha": "^6.1.4",
+    "mochawesome": "^3.1.2",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  }
+}

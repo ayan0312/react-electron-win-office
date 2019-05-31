@@ -1,0 +1,57 @@
+#ayan-timer {
+    text-align: center;
+
+    .ayan-time-display {
+        font-size: 50px;
+    }
+
+    .ayan-control {
+        .ayan-control-option{
+            input {
+                background: #FF0033;
+                color: #FFCC33;
+                border: none;
+                padding: 4px 10px;
+                font-size: 20px;
+                width: 80px;
+                outline: none;
+                border-radius: 5px;
+                display: block;
+                margin: 0 auto 20px;
+                box-shadow: none;
+            }
+    
+            input:focus {
+                outline: none;
+            }
+
+            .ayan-control-option-work{
+
+            }
+
+            .ayan-control-option-rest{
+
+            }
+        }
+
+        .ayan-control-button{
+            button {
+                border: none;
+                color: #FFCC33;
+                background: #333399;
+                padding: 10px;
+                font-size: 14px;
+                display: block;
+                margin: 0 auto 20px;
+                border-radius: 10px;
+                outline: none;
+                transition: 1s;
+                cursor: pointer;
+            }
+    
+            button:active {
+                padding: 20px;
+            }
+        }
+    }
+}
