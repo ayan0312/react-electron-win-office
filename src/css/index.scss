@@ -17,11 +17,16 @@
 
     @media screen and (max-width: 760px) {
         width: 100%;
-        padding: 20px 0;
+        height:100%;
+        padding: 0;
         bottom: 0;
         right: 0;
         border:none;
         border-radius: 0;
+
+        .ayan-control{
+            margin-top:70px;
+        }
     }
 
     .ayan-control {
