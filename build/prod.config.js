@@ -1,16 +1,18 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+process.env.NODE_ENV = "production"
+
 module.exports = {
 
-    mode: 'production',
+    mode: process.env.NODE_ENV,
 
     bail: true,
 
     devtool: 'source-map',
 
     entry: {
-        'ayanTimer': './src/js/index.js'
+        'ayanTimer': './src/renderer/js/index.js'
     },
 
     output: {
