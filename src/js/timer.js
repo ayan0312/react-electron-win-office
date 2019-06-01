@@ -2,6 +2,8 @@ import util from './util/util'
 import Template from './template'
 import Storage from './storage'
 
+export const version = '0.2.0'
+
 class Timer {
     constructor() {
         this.timer = null
@@ -11,6 +13,20 @@ class Timer {
 
     getTime() {
         return this.currentTime
+    }
+
+    createAsyncTimerResource(item) {
+        if (!this.timerAsyncRes) {
+            this.timerAsyncRes = {}
+        }
+
+        this.timerAsyncRes[item] = new Timer()
+
+        return this.timerAsyncRes[item]
+    }
+
+    getAsyncTimerResource(item) {
+        return this.timerAsyncRes[item]
     }
 
     getTimerStatus() {
@@ -70,7 +86,7 @@ class Timer {
 
     resetTime(callback) {
         clearInterval(this.timer)
-        this.startTime(0,callback)
+        this.startTime(0, callback)
     }
 }
 
@@ -79,12 +95,22 @@ export default class AyanTimer {
         this.timer = new Timer()
         this.storage = new Storage()
 
+        this.version = version
+
         this.options = this._handleOption(options)
         if (this.options.time === null) {
             this.options.time = this.timer.currentTime
         }
 
         this._init()
+    }
+
+    about() {
+        return `version:${this.version}`
+    }
+
+    static about() {
+        return `version:${version}`
     }
 
     _handleOption(options) {
@@ -107,15 +133,14 @@ export default class AyanTimer {
     }
 
     _bindEvents() {
-        let options = this.template.getItem('options')
         let buttons = this.template.getItem('buttons')
         let time = this.template.getItem('time')
 
-        let setTime = (currentTime)=>{
+        let setTime = (currentTime) => {
             time.innerHTML = currentTime
         }
 
-        buttons.work.addEventListener('click', (event) =>{
+        buttons.work.addEventListener('click', (event) => {
             let work = this.template.getItem('options').work.value
 
             this.storage.set('work', work)
@@ -123,7 +148,7 @@ export default class AyanTimer {
             this.timer.updateTime(work, setTime)
         }, false)
 
-        buttons.rest.addEventListener('click', (event)=> {
+        buttons.rest.addEventListener('click', (event) => {
             let rest = this.template.getItem('options').rest.value
 
             this.storage.set('rest', rest)
@@ -131,13 +156,20 @@ export default class AyanTimer {
             this.timer.updateTime(rest, setTime)
         }, false)
 
-        buttons.reset.addEventListener('click', (event)=> {
+        buttons.reset.addEventListener('click', (event) => {
             this.timer.resetTime(setTime)
         }, false)
 
-        buttons.now.addEventListener('click', (event)=> {
+        buttons.now.addEventListener('click', (event) => {
             this.timer.queryPresentTime(setTime)
         }, false)
 
+        let newTimer = this.timer.createAsyncTimerResource('now')
+        buttons.now.addEventListener('mouseenter', (event) => {
+            if(newTimer.isTimerPlaying) return
+            newTimer.queryPresentTime((currentTime) => {
+                buttons.now.dataset.balloon= currentTime
+            })
+        })
     }
 }

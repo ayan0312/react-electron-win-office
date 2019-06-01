@@ -4,6 +4,7 @@ export default class Storage {
 
     constructor() {
         this.data = {}
+        this.storage = util.storage()
     }
 
     get(item) {
@@ -12,22 +13,14 @@ export default class Storage {
         if (this.data.item) {
             value = this.data.item
         } else {
-            value = util.storage.get(item)
+            value = this.storage.get(item)
         }
 
-        if (typeof value === 'string') {
-            try {
-                return JSON.parse(value)
-            } catch (err) {
-                return err
-            }
-        } else {
-            return value
-        }
+        return value
     }
 
     set(item, value) {
-        this.data.item = JSON.stringify(value)
-        util.storage.set(item, this.data.item)
+        this.data.item = typeof value !== 'string' ? JSON.stringify(value) : value
+        this.storage.set(item, this.data.item)
     }
 }

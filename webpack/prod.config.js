@@ -66,11 +66,15 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|ttf)$/,
                 loader: 'url-loader',
                 options: {
                     'limit': 40000
                 }
+            },
+            {
+                test:/\.(ttf|woff)$/,
+                loader: 'file-loader'
             },
             {
                 test: /\.art$/,

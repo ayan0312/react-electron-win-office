@@ -69,6 +69,10 @@ module.exports = {
                 }
             },
             {
+                test:/\.(ttf|woff)$/,
+                loader: 'file-loader'
+            },
+            {
                 test: /\.art$/,
                 loader: 'art-template-loader'
             }
@@ -77,7 +81,7 @@ module.exports = {
 
     devServer: {
         compress: true,
-        contentBase: path.resolve(__dirname, '..', 'demo'),
+        contentBase: path.resolve(__dirname, '..', 'dist'),
         clientLogLevel: 'none',
         quiet: false,
         open: true,

@@ -1,21 +1,23 @@
 <div id="ayan-timer">
-    <p class="ayan-time-display">{{@ options.time }}</p>
-
     <div class="ayan-control">
+        <p class="ayan-control-time">{{@ options.time }}</p>
+
         <div class="ayan-control-option">
             <p>工作时间：
-                <input class="ayan-control-option-work" type="number" value="{{ options.work }}" />
+                <input class="ayan-input ayan-primary-input ayan-control-option-work" type="number" value="{{ options.work }}" />
             </p>
             <p>休息时间：
-                <input class="ayan-control-option-rest" type="number" value="{{ options.rest }}">
+                <input class="ayan-input ayan-primary-input ayan-control-option-rest" type="number" value="{{ options.rest }}">
             </p>
         </div>
         
         <div class="ayan-control-button">
-            <button class="ayan-control-button-work" data-balloon="开始工作" data-balloon-pos="left">工作</button>
-            <button class="ayan-control-button-rest" data-balloon="开始休息" data-balloon-pos="left">休息</button>
-            <button class="ayan-control-button-reset" data-balloon="工作取消" data-balloon-pos="left">取消</button>
-            <button class="ayan-control-button-now" data-balloon="查看当前时间" data-balloon-pos="left">查看当前时间</button>
+            <button class="ayan-button ayan-primary-button ayan-control-button-work">工作</button>
+            <button class="ayan-button ayan-primary-button ayan-control-button-rest">休息</button>
+            <button class="ayan-button ayan-default-button ayan-control-button-reset">取消</button>
+            <button class="ayan-button ayan-default-button ayan-control-button-now" data-balloon="查看当前时间" data-balloon-pos="up">查看当前时间</button>
         </div>
     </div>
+
+    {{include './square.art'}}
 </div>

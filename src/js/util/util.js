@@ -50,12 +50,34 @@ const util = {
         const sec = Math.floor(second - hour * 3600 - min * 60)
         return (hour > 0 ? [hour, min, sec] : [min, sec]).map(add0).join(':')
     },
-    storage: {
-        set: (key, value) => {
-            localStorage.setItem(key, value);
-        },
+    storage: () => {
+        let data = {}
 
-        get: (key) => localStorage.getItem(key)
+        let fakeStorage = {
+            set: (key, value) => {
+                if (typeof value !== 'string') {
+                    return new TypeError('fakeStorage..')
+                }
+                data[key] = value
+            },
+            get: (key) => {
+                return data[key]
+            }
+        }
+
+        if (window.localStorage === undefined) {
+            return fakeStorage
+        }
+
+        return {
+            set: (key, value) => {
+                localStorage.setItem(key, value);
+            },
+
+            get: (key) => {
+                return localStorage.getItem(key)
+            }
+        }
     },
     isMobile: isMobile
 }

@@ -1,57 +1,147 @@
-#ayan-timer {
-    text-align: center;
+#ayan-timer:hover {
+}
 
-    .ayan-time-display {
-        font-size: 50px;
+#ayan-timer {
+    transition: all 0.3s;
+    box-shadow:0 4px 8px 0 rgba(7, 17, 27, 0.07);
+    overflow: hidden;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: PoppinsLight, Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 300px;
+    background: #efefef;
+    padding: 40px 10px;
+    border-radius: 5px;
+
+    @media screen and (max-width: 760px) {
+        width: 100%;
+        padding: 20px 0;
+        bottom: 0;
+        right: 0;
+        border:none;
+        border-radius: 0;
     }
 
     .ayan-control {
-        .ayan-control-option{
-            input {
-                background: #FF0033;
-                color: #FFCC33;
-                border: none;
-                padding: 4px 10px;
-                font-size: 20px;
-                width: 80px;
-                outline: none;
-                border-radius: 5px;
-                display: block;
-                margin: 0 auto 20px;
-                box-shadow: none;
-            }
-    
-            input:focus {
-                outline: none;
-            }
+        position: relative;
+        z-index: 20;
 
-            .ayan-control-option-work{
-
-            }
-
-            .ayan-control-option-rest{
-
-            }
+        .ayan-control-time {
+            font-size: 50px;
         }
 
-        .ayan-control-button{
-            button {
-                border: none;
-                color: #FFCC33;
-                background: #333399;
-                padding: 10px;
-                font-size: 14px;
-                display: block;
-                margin: 0 auto 20px;
-                border-radius: 10px;
-                outline: none;
-                transition: 1s;
-                cursor: pointer;
-            }
-    
-            button:active {
-                padding: 20px;
-            }
+        .ayan-control-option {}
+
+        .ayan-control-button {}
+    }
+
+    .ayan-input {
+        background: none;
+        outline: none;
+        border: 0px;
+        display: block;
+        margin: 0 auto;
+        width: 60px;
+        padding: 5px;
+        font-size: 23px;
+        text-decoration: underline;
+    }
+
+    .ayan-input.ayan-primary-input {}
+
+    .ayan-button {
+        outline: none;
+        font-family: PoppinsLight, Arial, Helvetica, sans-serif;
+        padding: 8px 20px;
+        margin: 0 auto;
+        margin-top: 30px;
+        width: 160px;
+        font-size: 14px;
+        display: block;
+        text-align: center;
+        border-radius: 5px;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.025);
+        user-select: none;
+        cursor: pointer;
+        transition: all .3s;
+
+        border: 1px solid transparent;
+        color: #803b39;
+    }
+
+    .ayan-button.ayan-primary-button {
+        background: #dc995a;
+        border-color: #dc995a;
+    }
+
+    .ayan-button.ayan-primary-button:hover {
+        background: #e8a76a;
+    }
+
+    .ayan-button.ayan-default-button {
+        background: #fff;
+        border-color: #d9d9d9;
+    }
+
+    .ayan-button.ayan-default-button:hover {
+        border-color: #803b39;
+    }
+
+    @keyframes BeforeSquares {
+        from {
+            top: 10%;
+        }
+
+        to {
+            top: 15%;
         }
     }
+
+    @keyframes AfterSquares {
+        from {
+            top: 30px;
+        }
+
+        to {
+            top: 100px;
+        }
+    }
+
+    .square-block {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 15;
+        top:0;
+    }
+
+    .square-block>.before-square {
+        background: linear-gradient(to right, #efefef 0%, #ffffff 100%);
+        display: block;
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        right: -90px;
+        top: 15%;
+        transform: rotate(25deg);
+        animation: BeforeSquares 3s ease-in-out alternate infinite;
+        z-index: 21;
+    }
+
+    .square-block>.after-square {
+        background: linear-gradient(to right, #efefef 0%, #ffffff 100%);
+        display: block;
+        position: absolute;
+        width: 200px;
+        height:200px;
+        left: -100px;
+        top: 7%;
+        transform: rotate(-78deg);
+        animation: AfterSquares 3s ease-in-out alternate infinite;
+        z-index: 20;
+    }
+
 }

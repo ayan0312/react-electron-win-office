@@ -19,7 +19,7 @@ export default class Template {
         let options = {},
             buttons = {}
 
-        this.elements.time = this.container.querySelector('.ayan-time-display')
+        this.elements.time = this.container.querySelector('.ayan-control-time')
         options.work = this.container.querySelector('.ayan-control-option-work')
         options.rest = this.container.querySelector('.ayan-control-option-rest')
         buttons.work = this.container.querySelector('.ayan-control-button-work')
