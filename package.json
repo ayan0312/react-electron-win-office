@@ -3,23 +3,25 @@
   "version": "0.2.0",
   "author": "ayan0312 <ayan0312000@outlook.com>",
   "description": "a tomato timer",
-  "main": "./src/renderer/js/index.js",
+  "main": "./src/main/index.js",
   "scripts": {
     "start": "npm run dev",
     "build": "cross-env NODE_ENV=production webpack --config build/prod.config.js --progress --display-error-details --colors",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/dev.config.js --watch --colors",
     "test": "mocha",
-    "build:electron": "cross-env NODE_ENV=production electron "
+    "electron:dev": "npm start && electron .",
+    "electron:build": "cross-env NODE_ENV=production webpack --config build/electron.renderer.js --progress --display-error-details --colors && electron-builder build"
   },
   "build": {
     "productName": "ayanTimer",
-    "appId": "test",
+    "appId": "com.example.app",
     "copyright": "ayan",
     "directories": {
-      "output": "build"
+      "buildResources":"dist/build",
+      "output": "dist/electron"
     },
     "win": {
-      "icon": "./build/icons/ayanTimer-64x64.ico",
+      "icon": "./build/icons/ayanTimer-258x258.ico",
       "target": [
         {
           "target": "nsis"
@@ -31,9 +33,9 @@
     "oneClick": false,
     "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
-    "installerIcon": "./build/icons/ayanTimer-64x64.ico",
-    "uninstallerIcon": "./build/icons/uninstall-64x64.ico",
-    "installerHeaderIcon": "./build/icons/ayanTimer-64x64.ico",
+    "installerIcon": "./build/icons/ayanTimer-258x258.ico",
+    "uninstallerIcon": "./build/icons/uninstall-258x258.ico",
+    "installerHeaderIcon": "./build/icons/ayanTimer-258x258.ico",
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
     "shortcutName": "ayanTimer",
