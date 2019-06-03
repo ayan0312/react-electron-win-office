@@ -1,35 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-process.env.NODE_ENV = "production"
-
 module.exports = {
-
-    mode: process.env.NODE_ENV,
-
-    bail: true,
-
-    devtool: 'source-map',
-
-    entry: {
-        'ayanTimer': './src/renderer/js/index.js'
-    },
-
-    output: {
-        path: path.resolve(__dirname, '..', 'dist','build'),
-        filename: '[name].min.js',
-        library: '[name]',
-        libraryTarget: 'umd',
-        libraryExport: 'default',
-        umdNamedDefine: true,
-        publicPath: '/'
-    },
-
     resolve: {
         modules: ['node_modules'],
         extensions: ['.js', '.scss']
     },
-
     module: {
         strictExportPresence: true,
         rules: [

@@ -3,25 +3,25 @@
   "version": "0.2.0",
   "author": "ayan0312 <ayan0312000@outlook.com>",
   "description": "a tomato timer",
-  "main": "./src/main/index.js",
+  "main": "./dist/electron-build/main.js",
   "scripts": {
-    "start": "npm run dev",
-    "build": "cross-env NODE_ENV=production webpack --config build/prod.config.js --progress --display-error-details --colors",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/dev.config.js --watch --colors",
-    "test": "mocha",
-    "electron:dev": "npm start && electron .",
-    "electron:build": "cross-env NODE_ENV=production webpack --config build/electron.renderer.js --progress --display-error-details --colors && electron-builder build"
+    "env:prod":"cross-env NODE_ENV=production",
+    "env:dev":"cross-env NODE_ENV=development",
+    "web:build": "npm run env:prod && webpack --config build/web/prod.config.js --progress --display-error-details --colors",
+    "web:dev": "npm run env:dev && webpack-dev-server --config build/web/dev.config.js --watch --colors",
+    "electron:dev": "npm run env:dev && webpack --config build/electron/electronConfigMain.babel.js && electron ./dist/electron-build/main.js",
+    "electron:build": "npm run env:prod && electron-builder build",
+    "test": "mocha"
   },
   "build": {
     "productName": "ayanTimer",
     "appId": "com.example.app",
     "copyright": "ayan",
     "directories": {
-      "buildResources":"dist/build",
       "output": "dist/electron"
     },
     "win": {
-      "icon": "./build/icons/ayanTimer-258x258.ico",
+      "icon": "build/icons/ayanTimer-256x256.ico",
       "target": [
         {
           "target": "nsis"
@@ -33,16 +33,15 @@
     "oneClick": false,
     "allowElevation": true,
     "allowToChangeInstallationDirectory": true,
-    "installerIcon": "./build/icons/ayanTimer-258x258.ico",
-    "uninstallerIcon": "./build/icons/uninstall-258x258.ico",
-    "installerHeaderIcon": "./build/icons/ayanTimer-258x258.ico",
+    "installerIcon": "build/icons/ayanTimer-256x256.ico",
+    "uninstallerIcon": "build/icons/uninstall-256x256.ico",
+    "installerHeaderIcon": "build/icons/ayanTimer-256x256.ico",
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "ayanTimer",
-    "include": "./build/script/installer.nsh"
+    "shortcutName": "ayanTimer"
   },
   "files": [
-    "dist"
+    "dist/build/**/*"
   ],
   "bugs": {
     "url": "https://github.com/ayan0312/ayanTimer/issues"
@@ -52,6 +51,7 @@
   "dependencies": {
     "asar": "^2.0.1",
     "balloon-css": "^0.5.0",
+    "node-gyp": "^4.0.0",
     "promise-polyfill": "^8.1.0",
     "smoothscroll": "^0.4.0"
   },
@@ -59,6 +59,7 @@
     "art-template": "^4.13.2",
     "art-template-loader": "^1.4.3",
     "autoprefixer": "^9.5.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "7.1.5",
     "babel-preset-env": "^1.7.0",

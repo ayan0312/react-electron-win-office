@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="renderder.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(130, 57, 53);
+            font-weight: bold;
+            user-select: none;
+            position: relative;
+            z-index: 20;
+        }
+
+        #timer{
+            margin-top:40px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="timer">
+    </div>
+
+    <script src="renderder.js"></script>
+    <script>
+        var timer = new AyanTimer({
+            container: document.querySelector("#timer")
+        })
+    </script>
+</body>
+
+</html>
