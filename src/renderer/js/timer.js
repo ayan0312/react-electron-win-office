@@ -8,7 +8,7 @@ class Timer {
     constructor() {
         this.timer = null
         this.isTimerPlaying = false
-        this.currentTime = "00:20"
+        this.currentTime = "00:00"
     }
 
     getTime() {

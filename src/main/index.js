@@ -1,4 +1,4 @@
-import { ElectronWindow } from './window'
+import { ElectronWindow } from './mainWindow'
 
 const win = ElectronWindow.getInstance()
 

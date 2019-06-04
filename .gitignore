@@ -4,3 +4,4 @@ yarn-error.log
 .vscode
 mochawesome-report
 dist/electron
+release

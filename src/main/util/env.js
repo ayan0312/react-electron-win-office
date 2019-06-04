@@ -1,16 +1,16 @@
-let env = process.env.NODE_ENV
-
 export class Env {
+    static env = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
+
     static getEnv() {
-        return env
+        return this.env
     }
 
     static isDev() {
-        return env === 'development'
+        return this.env === 'development'
     }
 
     static isProd() {
-        return env === 'production'
+        return this.env === 'production'
     }
 }
 
@@ -20,6 +20,6 @@ export class ResourcesDirectory {
     }
 
     getIndexURL() {
-        return `http://localhost:${this.port}/index.html`
+        return Env.isDev() ? `http://localhost:${this.port}/index.html` : `file://${__dirname}/index.html`
     }
 }
