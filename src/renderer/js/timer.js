@@ -163,13 +163,5 @@ export default class AyanTimer {
         buttons.now.addEventListener('click', (event) => {
             this.timer.queryPresentTime(setTime)
         }, false)
-
-        let newTimer = this.timer.createAsyncTimerResource('now')
-        buttons.now.addEventListener('mouseenter', (event) => {
-            if(newTimer.isTimerPlaying) return
-            newTimer.queryPresentTime((currentTime) => {
-                buttons.now.dataset.balloon= currentTime
-            })
-        })
     }
 }

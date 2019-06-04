@@ -1,16 +1,17 @@
 {
   "name": "ayan-timer",
   "version": "0.2.0",
-  "author": "ayan0312 <ayan0312000@outlook.com>",
+  "author": {
+    "name": "ayan0312",
+    "email": "ayan0312000@outlook.com",
+    "url": "https://jangred.cn"
+  },
   "description": "a tomato timer",
   "main": "./dist/electron-build/main.js",
   "scripts": {
-    "env:prod":"cross-env NODE_ENV=production",
-    "env:dev":"cross-env NODE_ENV=development",
-    "web:build": "npm run env:prod && webpack --config build/web/prod.config.js --progress --display-error-details --colors",
-    "web:dev": "npm run env:dev && webpack-dev-server --config build/web/dev.config.js --watch --colors",
-    "electron:dev": "npm run env:dev && webpack --config build/electron/electronConfigMain.babel.js && electron ./dist/electron-build/main.js",
-    "electron:build": "npm run env:prod && electron-builder build",
+    "build:main": "cross-env NODE_ENV=production webpack --config webpack/webpackConfigMain.babel.js",
+    "build:renderer": "cross-env NODE_ENV=production webpack --config webpack/webpackConfigRenderder.babel.js",
+    "build:electron": "cross-env NODE_ENV=development electron ./build/main.js",
     "test": "mocha"
   },
   "build": {
@@ -50,37 +51,50 @@
   "license": "MIT",
   "dependencies": {
     "asar": "^2.0.1",
-    "balloon-css": "^0.5.0",
-    "node-gyp": "^4.0.0",
-    "promise-polyfill": "^8.1.0",
-    "smoothscroll": "^0.4.0"
+    "node-gyp": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
     "art-template": "^4.13.2",
     "art-template-loader": "^1.4.3",
     "autoprefixer": "^9.5.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
+    "chalk": "^2.4.2",
+    "core-js": "^3.1.3",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
+    "dotenv": "^8.0.0",
+    "dotenv-webpack": "^1.7.0",
     "electron": "^5.0.2",
     "electron-builder": "^20.41.0",
     "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.7.0",
     "mocha": "^6.1.4",
     "mochawesome": "^3.1.2",
     "node-sass": "^4.12.0",
+    "node-sass-utils": "^1.1.2",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.23.1",
+    "svg-sprite-loader": "^4.1.6",
+    "svgo": "^1.2.2",
+    "svgo-loader": "^2.2.0",
+    "terser-webpack-plugin": "^1.3.0",
     "url-loader": "^1.1.2",
-    "webpack": "^4.12.0",
+    "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1",
     "webpack-merge": "^4.2.1"
+  },
+  "devEngines": {
+    "node": "12.2.0",
+    "npm": "6.9.0"
   }
 }

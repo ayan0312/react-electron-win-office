@@ -15,7 +15,7 @@
             <button class="ayan-button ayan-primary-button ayan-control-button-work">工作</button>
             <button class="ayan-button ayan-primary-button ayan-control-button-rest">休息</button>
             <button class="ayan-button ayan-default-button ayan-control-button-reset">取消</button>
-            <button class="ayan-button ayan-default-button ayan-control-button-now" data-balloon="查看当前时间" data-balloon-pos="up">查看当前时间</button>
+            <button class="ayan-button ayan-default-button ayan-control-button-now">查看当前时间</button>
         </div>
     </div>
 
