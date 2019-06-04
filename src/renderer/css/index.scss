@@ -12,6 +12,7 @@
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
     z-index: 99;
+    -webkit-app-region: drag;
 
     @media screen and (max-width: 760px) {
         width: 100%;
@@ -48,6 +49,7 @@
     }
 
     .ayan-input {
+        -webkit-app-region: no-drag;
         color: rgb(130, 57, 53);
         font-weight: bold;
         background: none;
@@ -64,6 +66,7 @@
     .ayan-input.ayan-primary-input {}
 
     .ayan-button {
+        -webkit-app-region: no-drag;
         outline: none;
         font-family: PoppinsLight, Arial, Helvetica, sans-serif;
         padding: 8px 20px;
