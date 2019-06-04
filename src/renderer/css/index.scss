@@ -1,31 +1,29 @@
-#ayan-timer:hover {
-}
-
 #ayan-timer {
     transition: all 0.3s;
-    box-shadow:0 4px 8px 0 rgba(7, 17, 27, 0.07);
+    box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.07);
     overflow: hidden;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    font-family: PoppinsLight, Arial, Helvetica, sans-serif;
     text-align: center;
     width: 300px;
     background: #efefef;
     padding: 40px 10px;
     border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 99;
 
     @media screen and (max-width: 760px) {
         width: 100%;
-        height:100%;
+        height: 100%;
         padding: 0;
         bottom: 0;
         right: 0;
-        border:none;
+        border: none;
         border-radius: 0;
 
-        .ayan-control{
-            margin-top:70px;
+        .ayan-control {
+            margin-top: 70px;
         }
     }
 
@@ -34,15 +32,24 @@
         z-index: 20;
 
         .ayan-control-time {
-            font-size: 50px;
+            color: rgb(130, 57, 53);
+            font-weight: bold;
+            font-size: 60px;
+            user-select: none;
         }
 
-        .ayan-control-option {}
+        .ayan-control-option {
+            color: rgb(130, 57, 53);
+            font-weight: bold;
+            user-select: none;
+        }
 
         .ayan-control-button {}
     }
 
     .ayan-input {
+        color: rgb(130, 57, 53);
+        font-weight: bold;
         background: none;
         outline: none;
         border: 0px;
@@ -120,7 +127,7 @@
         height: 100%;
         position: absolute;
         z-index: 15;
-        top:0;
+        top: 0;
     }
 
     .square-block>.before-square {
@@ -141,7 +148,7 @@
         display: block;
         position: absolute;
         width: 200px;
-        height:200px;
+        height: 200px;
         left: -100px;
         top: 7%;
         transform: rotate(-78deg);

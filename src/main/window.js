@@ -37,7 +37,6 @@ export class ElectronWindow {
     }
 
     _CreateWindow() {
-        let indexUrl = resourcesDirectory.getIndex()
 
         win = new BrowserWindow({
             width: 800,
@@ -47,7 +46,7 @@ export class ElectronWindow {
             }
         })
 
-        win.loadURL(indexUrl)
+        win.loadURL(resourcesDirectory.getIndexURL())
 
         win.webContents.openDevTools()
         win.on('closed', () => {

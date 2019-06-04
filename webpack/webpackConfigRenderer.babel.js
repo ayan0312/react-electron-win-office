@@ -1,5 +1,3 @@
-import injectedStylingVars from '../src/shared/injectedStylingVars'
-
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -7,21 +5,19 @@ import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import SpritePlugin from 'svg-sprite-loader/plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import Dotenv from 'dotenv-webpack'
 
 import paths from './utils/paths'
 import env from './utils/env'
-import injectGetFunction from './sassLoader'
-
-const port = process.env.PORT || 1212
 
 const getStyleLoaders = loaders => {
-    return [
-        env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader
-    ].concat(loaders)
-}
+	return [
+	  env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+	].concat(loaders)
+  }
+
+const port = process.env.PORT || 1212
 
 const rules = []
 rules.push({
@@ -35,43 +31,30 @@ rules.push({
 
 rules.push({
     test: /\.scss/,
-    include: paths.rendererPath,
     use: getStyleLoaders([
         {
             loader: 'css-loader',
             options: {
                 importLoaders: 1,
-                sourceMap: env.isDev,
-                modules: true,
-                localIdentName: env.isDev
-                    ? '[name]-[local]-[hash:base64:5]'
-                    : '[hash:base64:5]'
+                minimize: true,
+                sourceMap: true
             }
         },
         {
             loader: 'postcss-loader',
             options: {
-                plugins: {
-                    'autoprefixer': {}
-                }
+                plugins: [
+                    require('autoprefixer')
+                ]
             }
         },
-        {
-            loader: 'sass-loader',
-            options: {
-                sourceMap: env.isDev,
-                includePaths: [
-                    path.resolve(paths.rendererPath, 'styles')
-                ],
-                functions: injectGetFunction(injectedStylingVars)
-            }
-        }
+        'sass-loader'
     ])
 })
 
 rules.push({
     test: /\.css/,
-    use: getStyleLoaders([
+    use:getStyleLoaders([
         {
             loader: 'css-loader',
             options: {
@@ -94,40 +77,8 @@ rules.push({
 })
 
 rules.push({
-    test: /\.(svg)(\?.*)?$/,
-    exclude: paths.iconsPath,
-    use: [
-        {
-            loader: 'file-loader',
-            options: {
-                name: env.isDev ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]'
-            }
-        },
-        {
-            loader: 'svgo-loader',
-            options: {
-                plugins: [
-                    { removeTitle: true },
-                    { convertPathData: false },
-                    { removeUselessStrokeAndFill: true }
-                ]
-            }
-        }
-    ]
-})
-
-rules.push({
-    test: /\.svg$/,
-    include: paths.iconsPath,
-    use: [
-        {
-            loader: 'svg-sprite-loader',
-            options: {
-                extract: true,
-                spriteFilename: 'sprite-[hash:6].svg'
-            }
-        }
-    ]
+    test: /\.art$/,
+    loader: 'art-template-loader'
 })
 
 rules.push({
@@ -135,8 +86,7 @@ rules.push({
     use: {
         loader: 'url-loader',
         options: {
-            limit: 10000,
-            mimetype: 'application/octet-stream'
+            limit: 10000
         }
     }
 })
@@ -144,10 +94,16 @@ rules.push({
 let plugins = [
     new HtmlWebpackPlugin({
         template: path.resolve(paths.rendererPath, 'index.html'),
-        inject: true,
-        minify: env.isProd
+		inject: true,
+		minify: env.isProd ? {
+		collapseWhitespace: true,
+		removeComments: true,
+		removeRedundantAttributes: true,
+		removeScriptTypeAttributes: true,
+		removeStyleLinkTypeAttributes: true,
+		useShortDoctype: true
+		} : false
     }),
-    new SpritePlugin(),
     new Dotenv({
         safe: true,
         systemvars: true
@@ -159,7 +115,7 @@ if (env.isDev) {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.LoaderOptionsPlugin({
-            debug: true
+        	debug: true
         })
     )
 }
@@ -174,35 +130,27 @@ if (env.isProd) {
     )
 }
 
-const output = env.isDev ?
-    { filename: 'renderer.js' } :
-    {
-        path: paths.buildPath,
-        publicPath: './',
-        filename: 'renderer.js'
-    }
-
+const output = env.isDev ? {
+    filename: 'renderer.js'
+} : {
+    path: paths.buildPath,
+    publicPath: './',
+    filename: 'renderer.js'
+}
+  
 const entry = env.isDev ? [
     `webpack-dev-server/client?http://localhost:${port}/`,
     'webpack/hot/only-dev-server',
-    require.resolve('../../src/renderer/index')
+    require.resolve('../src/renderer/index')
 ] : path.resolve(paths.rendererPath, 'index')
 
 const webpackConfig = {
     mode: env.isDev ? 'development' : 'production',
     target: 'electron-renderer',
     devtool: env.isDev ? 'inline-source-map' : 'source-map',
+    entry,
     output,
     plugins,
-    optimization: {
-        minimizer: [
-            new TerserPlugin({
-                parallel: true,
-                sourceMap: true,
-                cache: true
-            })
-        ]
-    },
     resolve: {
         modules: [
             'node_modules',
@@ -210,16 +158,15 @@ const webpackConfig = {
             paths.rendererPath
         ]
     },
-    entry,
     module: {
         rules
-    },
-    cache: env.isDev,
-    stats: 'minimal',
-    node: {
-        __dirname: false,
-        __filename: false
-    }
+	},
+	cache: env.isDev,
+	stats: 'minimal',
+	node: {
+		__dirname: false,
+		__filename: false
+	}
 }
 
 if (env.isDev) {
@@ -231,10 +178,8 @@ if (env.isDev) {
         },
         compress: true,
         hot: true,
-        open: false,
-        inline: true,
-        lazy: false,
-        stats: 'minimal',
+		open: false,
+		stats: 'minimal',
         contentBase: paths.buildPath
     }
 }

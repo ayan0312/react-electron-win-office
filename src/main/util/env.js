@@ -1,6 +1,4 @@
-import Config from './config'
-
-const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'production'
+let env = process.env.NODE_ENV
 
 export class Env {
     static getEnv() {
@@ -17,25 +15,11 @@ export class Env {
 }
 
 export class ResourcesDirectory {
-    constructor(resDir = {}) {
-        this.ResourcesDirectory = Object.assign(resDir, Config)
-        this.localhost = this.ResourcesDirectory.localhost
-        this.indexDirectory = this.ResourcesDirectory.directory
+    constructor() {
+        this.port = process.env.PORT || 1212
     }
 
-    getIndex() {
-        if (Env.isDev) {
-            return this.getUrl()+'/'+this.indexDirectory.index.name
-        } else {
-            return this.indexDirectory.url+'/'+this.indexDirectory.index.name
-        }
-    }
-
-    getUrl() {
-        if (Env.isDev) {
-            return `http://${this.ResourcesDirectory.localhost.url}:${this.ResourcesDirectory.localhost.port}`
-        } else {
-            return this.ResourcesDirectory.request
-        }
+    getIndexURL() {
+        return `http://localhost:${this.port}/index.html`
     }
 }
