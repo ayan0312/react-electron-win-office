@@ -1,7 +1,7 @@
-import select from './select'
+import Select from './select'
 
 const element = {
-    select: select
+    Select: Select
 }
 
 export default element

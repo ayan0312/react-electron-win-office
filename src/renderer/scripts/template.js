@@ -1,5 +1,6 @@
 import tplTimer from '../template/timer.art'
 import Icons from './icons'
+import SelectDateInput from './components/SelectDateInput/SelectDateInput'
 
 export default class Template {
 
@@ -14,9 +15,12 @@ export default class Template {
     _init() {
         this.container.innerHTML = tplTimer({
             icons: Icons,
-            options: this.options
+            options: this.options,
+            selectDateInput:SelectDateInput.html()
         })
 
+
+        this.elements.ayanTimer = this.container.querySelector('.ayan-timer')
         this.elements.time = this.container.querySelector('.ayan-control-time')
 
         this.elements.options = {
@@ -38,7 +42,9 @@ export default class Template {
 
         this.elements.setting = {
             setting:this.container.querySelector('.ayan-setting'),
-            cancel:this.container.querySelector('.ayan-setting-cancel')
+            cancel:this.container.querySelector('.ayan-setting-cancel'),
+            start:this.container.querySelector('.ayan-setting-input-start'),
+            end:this.container.querySelector('.ayan-setting-input-end'),
         }
 
     }

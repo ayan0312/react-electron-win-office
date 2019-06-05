@@ -1,4 +1,0 @@
-<div class="square-block" id="square-block">
-    <i class="before-square" id="before-square"></i>
-    <i class="after-square" id="after-square"></i>
-</div>

@@ -1,4 +1,4 @@
-import util from './util/util'
+import util from './util'
 import Template from './template'
 import Storage from './storage'
 import elements from './element/index'
@@ -44,7 +44,8 @@ export default class AyanTimer {
 
     _init() {
         this.template = new Template(this.options)
-        this.select = new elements.select(this)
+        this.select = new elements.Select(this)
+        
 
         let buttons = this.template.getItem('buttons')
         let time = this.template.getItem('time')

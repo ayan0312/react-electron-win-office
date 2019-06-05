@@ -1,4 +1,4 @@
-<div id="ayan-timer">
+<div class="ayan-timer">
     <div class="ayan-control">
         <p class="ayan-control-time">{{@ options.time }}</p>
 
@@ -23,7 +23,30 @@
             {{@ icons.menu }}
         </span>
         <ul class="ayan-select-list">
-            {{ include './menu-list.art' }}
+            <h4>选项</h4>
+            <li class="ayan-select-list-plan">
+                <span>设置计划</span>
+            </li>
+            <li class="ayan-select-list-history">
+                <span>历史记录</span>
+            </li>
+            <h4>高级选项</h4>
+            <li>
+                <span>导出数据</span>
+            </li>
+            <li>
+                <span>导入数据</span>
+            </li>
+            <h4>关于</h4>
+            <li>
+                <span>捐献</span>
+            </li>
+            <li>
+                <span>帮助</span>
+            </li>
+            <li>
+                <span>开发者</span>
+            </li>
         </ul>
     </div>
 
@@ -33,29 +56,24 @@
         </span>
         <div class="ayan-setting-input">
             <h4>设置</h4>
+
             <p>起始时间：</p>
-            <div class="ayan-setting-input-start ayan-input-date">
-                <span>00:00:00 凌晨</span>
-                <div class="">
+            <span class="ayan-setting-input-start ayan-input-date">00:00:00 凌晨</span>
 
-                </div>
-            </div>
             <p>结束时间：</p>
-            <div class="ayan-setting-input-end ayan-input-date">
-                <span>00:00:00 凌晨</span>
-                <div class="">
+            <span class="ayan-setting-input-end ayan-input-date">00:00:00 凌晨</span>
 
-                </div>
-            </div>
             <p>此次任务名称：</p>
             <input type="text" style="width:200px" placeholder="请输入" />
 
             <button class="ayan-button ayan-default-button">提交</button>
         </div>
-        <div class="ayan-date-mark">
-             {{include './date-list.art'}}
-        </div>
     </div>
 
-    {{include './square.art'}}
+    {{@ selectDateInput }}
+
+    <div class="square-block" id="square-block">
+        <i class="before-square" id="before-square"></i>
+        <i class="after-square" id="after-square"></i>
+    </div>
 </div>

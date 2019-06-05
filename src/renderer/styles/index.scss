@@ -1,4 +1,7 @@
-#ayan-timer {
+$Width :330px;
+$Heigth:670px;
+
+.ayan-timer {
     transition: all 0.3s;
     box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.07);
     overflow: hidden;
@@ -6,7 +9,8 @@
     bottom: 20px;
     right: 20px;
     text-align: center;
-    width: 300px;
+    width: $Width;
+    height:$Heigth;
     background: #efefef;
     padding: 40px 10px;
     border-radius: 5px;
@@ -144,7 +148,7 @@
         }
 
         input,
-        .ayan-input-date>span {
+        .ayan-input-date{
             transition: all 0.3s;
             background: none;
             outline: none;
@@ -163,12 +167,12 @@
         }
 
         input:hover,
-        .ayan-input-date>span:hover {
+        .ayan-input-date:hover {
             border-color: #803b39;
             color: #803b39;
         }
 
-        .ayan-input-date>span {
+        .ayan-input-date {
             cursor: pointer;
         }
 
@@ -179,48 +183,99 @@
 
     .ayan-date-mark {
         position: absolute;
-        width: 210px;
-        height: 120px;
-        left: 85px;
-        top: 205px;
-        font-size: 14px;
+        right: 0px;
+        top: 0px;
         text-align: left;
-        background-color: #fff;
-        background-clip: padding-box;
-        border-radius: 4px;
-        outline: none;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        border-radius: 10px;
-        
+        z-index:70;
+        display: none;
+        width:210px;
 
-        .ayan-date-mark-select {
-            height: 100%;
-            width: 70px;
+        &>.ayan-date-mark-info {
+            transition: all 0.3s;
+            background: none;
+            outline: none;
+            width: 100px;
+            display: block;
+            padding: 4px 11px;
+            color: rgba(0, 0, 0, 0.65);
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            position: relative;
+            cursor: text;
+            user-select: none;
             float: left;
-            overflow-y: auto;
+            border-right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
 
-            ul {
-                margin: 0;
-                padding: 0;
-                list-style: none;
+        &>.ayan-button {
+            margin: 0;
+            float: left;
+            width: 85px;
+            padding: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &>.ayan-date-mark-list {
+            width: 210px;
+            height: 180px;
+            font-size: 14px;
+            background-clip: padding-box;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            outline: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+
+            &>.ayan-date-mark-select {
                 height: 100%;
-                width: 100%;
+                width: 70px;
+                float: left;
+                overflow-y: auto;
+                background-color: #fff;
 
-                li {
-                    font-size: 14px;
-                    padding: 5px 0 5px 20px;
-                    text-align: left;
-                    cursor: pointer;
-                    color: rgba(0,0,0,0.65)
+                &>ul {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    height: 100%;
+                    width: 100%;
+
+                    &>li {
+                        font-size: 14px;
+                        padding: 5px 0 5px 20px;
+                        text-align: left;
+                        cursor: pointer;
+                        color: rgba(0, 0, 0, 0.65)
+                    }
+
+                    &>li:hover,
+                    &>.ayan-current {
+                        color: rgba(0, 0, 0, 0.65);
+                        font-weight: 600;
+                        background-color: #fafafa;
+                    }
+
                 }
-
-                li:hover {
-                    color: rgba(0, 0, 0, 0.65);
-                    font-weight: 600;
-                    background-color: #fafafa;
-                }
-
             }
+        }
+
+        &>.ayan-date-mark-list::after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
         }
     }
 

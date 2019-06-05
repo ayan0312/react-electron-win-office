@@ -1,4 +1,4 @@
-const isMobile = /mobile/i.test(window.navigator.userAgent)
+let window = {}
 
 const util = {
     format(fmt) {
@@ -43,6 +43,22 @@ const util = {
         return fmt
 
     },
+    getCurrentTimeName(fmt){
+		let hour = parseInt(fmt.split(':')[0])
+            if(hour< 6)
+				return '凌晨'
+			else if(hour < 9)
+				return '早晨'
+			else if(hour < 12)
+				return '上午'
+			else if(hour < 13)
+				return '中午'
+			else if(hour < 18)
+				return '下午'
+			else if(hour < 24)
+				return '晚上'
+    },
+
     secondToTime(second) {
         const add0 = (num) => num < 10 ? '0' + num : '' + num
         const hour = Math.floor(second / 3600)
@@ -78,8 +94,7 @@ const util = {
                 return localStorage.getItem(key)
             }
         }
-    },
-    isMobile: isMobile
+    }
 }
 
 export default util
