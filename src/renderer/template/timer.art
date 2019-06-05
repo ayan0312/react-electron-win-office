@@ -18,6 +18,14 @@
             <button class="ayan-button ayan-default-button ayan-control-button-now">查看当前时间</button>
         </div>
     </div>
+    <div class="ayan-select">
+        <span class="ayan-select-menu">
+            {{@ icons.menu }}
+        </span>
+        <ul class="ayan-select-list">
+            {{ include './menu-list.art' }}
+        </ul>
+    </div>
 
     {{include './square.art'}}
 </div>

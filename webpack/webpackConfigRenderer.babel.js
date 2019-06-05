@@ -5,17 +5,16 @@ import path from 'path'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import TerserPlugin from 'terser-webpack-plugin'
 import Dotenv from 'dotenv-webpack'
 
 import paths from './utils/paths'
 import env from './utils/env'
 
 const getStyleLoaders = loaders => {
-	return [
-	  env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader
-	].concat(loaders)
-  }
+    return [
+        env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader
+    ].concat(loaders)
+}
 
 const port = process.env.PORT || 1212
 
@@ -54,7 +53,7 @@ rules.push({
 
 rules.push({
     test: /\.css/,
-    use:getStyleLoaders([
+    use: getStyleLoaders([
         {
             loader: 'css-loader',
             options: {
@@ -62,6 +61,11 @@ rules.push({
             }
         }
     ])
+})
+
+rules.push({
+    test: /\.svg$/,
+    loader: 'svg-inline-loader'
 })
 
 rules.push({
@@ -94,15 +98,15 @@ rules.push({
 let plugins = [
     new HtmlWebpackPlugin({
         template: path.resolve(paths.rendererPath, 'index.html'),
-		inject: true,
-		minify: env.isProd ? {
-		collapseWhitespace: true,
-		removeComments: true,
-		removeRedundantAttributes: true,
-		removeScriptTypeAttributes: true,
-		removeStyleLinkTypeAttributes: true,
-		useShortDoctype: true
-		} : false
+        inject: true,
+        minify: env.isProd ? {
+            collapseWhitespace: true,
+            removeComments: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true
+        } : false
     }),
     new Dotenv({
         safe: true,
@@ -115,7 +119,7 @@ if (env.isDev) {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.LoaderOptionsPlugin({
-        	debug: true
+            debug: true
         })
     )
 }
@@ -133,11 +137,11 @@ if (env.isProd) {
 const output = env.isDev ? {
     filename: 'renderer.js'
 } : {
-    path: paths.buildPath,
-    publicPath: './',
-    filename: 'renderer.js'
-}
-  
+        path: paths.buildPath,
+        publicPath: './',
+        filename: 'renderer.js'
+    }
+
 const entry = env.isDev ? [
     `webpack-dev-server/client?http://localhost:${port}/`,
     'webpack/hot/only-dev-server',
@@ -160,13 +164,13 @@ const webpackConfig = {
     },
     module: {
         rules
-	},
-	cache: env.isDev,
-	stats: 'minimal',
-	node: {
-		__dirname: false,
-		__filename: false
-	}
+    },
+    cache: env.isDev,
+    stats: 'minimal',
+    node: {
+        __dirname: false,
+        __filename: false
+    }
 }
 
 if (env.isDev) {
@@ -178,8 +182,8 @@ if (env.isDev) {
         },
         compress: true,
         hot: true,
-		open: false,
-		stats: 'minimal',
+        open: false,
+        stats: 'minimal',
         contentBase: paths.buildPath
     }
 }

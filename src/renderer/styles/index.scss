@@ -48,6 +48,81 @@
         .ayan-control-button {}
     }
 
+    .ayan-select {
+
+        .ayan-select-menu {
+            display: inline-block;
+            height:30px;
+            width:30px;
+            padding:5px;
+            position: absolute;
+            right:10px;
+            top:10px;
+            background:#fff;
+            z-index: 22;
+            cursor: pointer;
+            border-radius:100%;
+            border:2px solid #b1afaf;
+            transition: all 0.5s;
+
+            &>svg{
+                
+            }
+        }
+
+        .ayan-select-menu:hover {
+            transform: rotate(180deg);
+
+            &+.ayan-select-list{
+                right:0;
+            }
+        }
+
+        ul{
+            list-style:none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ayan-select-list:hover{
+            right:0;
+        }
+
+        .ayan-select-list{
+            transition:all 1s;
+            height:100%;
+            width:150px;
+            background:#fff;
+            box-shadow: 0 0 8px 0 rgba(7, 17, 27, 0.07) inset;
+            display: block;
+            position: absolute;
+            right:-152px;
+            top:0;
+            z-index: 23;
+        }
+
+        .ayan-select-list>li{
+            width:80%;
+            padding:10px 10%;
+            color:rgba(0,0,0,0.65);
+            text-align: left;
+            cursor: pointer;
+            font-size:14px;
+            user-select: none;
+        }
+
+        h4{
+            color:rgba(0,0,0,0.65);
+            user-select: none;
+        }
+
+        .ayan-select-list>li:hover{
+            color: rgba(0,0,0,0.65);
+            font-weight: 600;
+            background-color: #fafafa;
+        }
+    }
+
     .ayan-input {
         -webkit-app-region: no-drag;
         color: rgb(130, 57, 53);
