@@ -49,78 +49,194 @@
     }
 
     .ayan-select {
-
         .ayan-select-menu {
-            display: inline-block;
-            height:30px;
-            width:30px;
-            padding:5px;
-            position: absolute;
-            right:10px;
-            top:10px;
-            background:#fff;
+            right: 10px;
+            top: 10px;
             z-index: 22;
-            cursor: pointer;
-            border-radius:100%;
-            border:2px solid #b1afaf;
-            transition: all 0.5s;
-
-            &>svg{
-                
-            }
         }
 
         .ayan-select-menu:hover {
             transform: rotate(180deg);
 
-            &+.ayan-select-list{
-                right:0;
+            &+.ayan-select-list {
+                right: 0;
             }
         }
 
-        ul{
-            list-style:none;
+        ul {
+            list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .ayan-select-list:hover{
-            right:0;
+        .ayan-select-list:hover {
+            right: 0;
         }
 
-        .ayan-select-list{
-            transition:all 1s;
-            height:100%;
-            width:150px;
-            background:#fff;
+        .ayan-select-list {
+            transition: all 1s;
+            height: 100%;
+            width: 150px;
+            background: #fff;
             box-shadow: 0 0 8px 0 rgba(7, 17, 27, 0.07) inset;
             display: block;
             position: absolute;
-            right:-152px;
-            top:0;
+            right: -152px;
+            top: 0;
             z-index: 23;
         }
 
-        .ayan-select-list>li{
-            width:80%;
-            padding:10px 10%;
-            color:rgba(0,0,0,0.65);
+        .ayan-select-list>li {
+            width: 80%;
+            padding: 10px 10%;
+            color: rgba(0, 0, 0, 0.65);
             text-align: left;
             cursor: pointer;
-            font-size:14px;
+            font-size: 14px;
             user-select: none;
         }
 
-        h4{
-            color:rgba(0,0,0,0.65);
+        h4 {
+            color: rgba(0, 0, 0, 0.65);
             user-select: none;
         }
 
-        .ayan-select-list>li:hover{
-            color: rgba(0,0,0,0.65);
+        .ayan-select-list>li:hover {
+            color: rgba(0, 0, 0, 0.65);
             font-weight: 600;
             background-color: #fafafa;
         }
+    }
+
+    .ayan-setting {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        transition: all 1s;
+        background: #fff;
+        box-shadow: 0 0 8px 0 rgba(7, 17, 27, 0.07) inset;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 24;
+
+        p {
+            font-size: 14px;
+        }
+
+        .ayan-setting-cancel {
+            z-index: 25;
+            left: 10px;
+            top: 10px;
+        }
+
+        .ayan-setting-cancel:hover {
+            width: 20px;
+            height: 20px;
+            left: 15px;
+            top: 15px;
+        }
+
+        .ayan-setting-input {
+            padding: 70px 40px;
+            text-align: left;
+            user-select: none;
+        }
+
+        input,
+        .ayan-input-date>span {
+            transition: all 0.3s;
+            background: none;
+            outline: none;
+            width: 100px;
+            display: block;
+            padding: 4px 11px;
+            color: rgba(0, 0, 0, 0.65);
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            position: relative;
+            cursor: text;
+        }
+
+        input:hover,
+        .ayan-input-date>span:hover {
+            border-color: #803b39;
+            color: #803b39;
+        }
+
+        .ayan-input-date>span {
+            cursor: pointer;
+        }
+
+    }
+
+
+    /* common */
+
+    .ayan-date-mark {
+        position: absolute;
+        width: 210px;
+        height: 120px;
+        left: 85px;
+        top: 205px;
+        font-size: 14px;
+        text-align: left;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-radius: 4px;
+        outline: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        
+
+        .ayan-date-mark-select {
+            height: 100%;
+            width: 70px;
+            float: left;
+            overflow-y: auto;
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                height: 100%;
+                width: 100%;
+
+                li {
+                    font-size: 14px;
+                    padding: 5px 0 5px 20px;
+                    text-align: left;
+                    cursor: pointer;
+                    color: rgba(0,0,0,0.65)
+                }
+
+                li:hover {
+                    color: rgba(0, 0, 0, 0.65);
+                    font-weight: 600;
+                    background-color: #fafafa;
+                }
+
+            }
+        }
+    }
+
+    .ayan-icon {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        padding: 5px;
+        position: absolute;
+        background: #fff;
+        cursor: pointer;
+        border-radius: 100%;
+        border: 2px solid #b1afaf;
+        transition: all 0.5s;
+
+        &>svg {}
     }
 
     .ayan-input {

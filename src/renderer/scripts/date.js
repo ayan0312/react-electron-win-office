@@ -1,4 +1,4 @@
-export default class Select {
+export default class AyanDate{
     constructor(){
         
     }

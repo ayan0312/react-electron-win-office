@@ -1,0 +1,22 @@
+<div class="ayan-date-mark-info"></div>
+<div class="ayan-date-mark-select">
+    <ul>
+    <% for(var i = 0; i < 25; i++){ %>
+        <li><%= i %></li>
+    <% } %>
+    </ul>
+</div>
+<div class="ayan-date-mark-select">
+    <ul>
+    <% for(var i = 0; i < 61; i++){ %>
+        <li><%= i %></li>
+    <% } %>
+    </ul>
+</div>
+<div class="ayan-date-mark-select">
+    <ul>
+    <% for(var i = 0; i < 61; i++){ %>
+        <li><%= i %></li>
+    <% } %>
+    </ul>
+</div>

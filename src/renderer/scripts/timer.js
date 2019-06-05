@@ -1,6 +1,7 @@
 import util from './util/util'
 import Template from './template'
 import Storage from './storage'
+import elements from './element/index'
 
 export const version = '0.2.0'
 
@@ -43,6 +44,7 @@ export default class AyanTimer {
 
     _init() {
         this.template = new Template(this.options)
+        this.select = new elements.select(this)
 
         let buttons = this.template.getItem('buttons')
         let time = this.template.getItem('time')
@@ -68,7 +70,7 @@ export default class AyanTimer {
         }, false)
 
         buttons.reset.addEventListener('click', (event) => {
-            this.timer.resetTime(setTime)
+            this.timer.cancelTime(setTime)
         }, false)
 
         buttons.now.addEventListener('click', (event) => {
@@ -79,21 +81,6 @@ export default class AyanTimer {
     }
 
     _bindEvents() {
-        this.on('start', () => {
-            console.log('start')
-        })
-
-        this.on('reset', () => {
-            console.log('reset')
-        })
-
-        this.on('now', () => {
-            console.log('now')
-        })
-
-        this.on('clear', () => {
-            console.log('clear')
-        })
     }
 }
 
@@ -101,11 +88,16 @@ class Timer {
     constructor() {
         this.timer = null
         this.isTimerPlaying = false
-        this.time = "00:00"
+        this.time = '00:00'
 
         this.events = {}
         this.timerEvents = [
-            'start', 'reset', 'stop', "now", 'timing', 'clear'
+            'start',
+            'cancel',
+            'stop',
+            'now',
+            'timing',
+            'clear'
         ]
     }
 
@@ -119,7 +111,7 @@ class Timer {
 
     _setInterval(callback = () => { }, interval) {
         return setInterval(() => {
-            this.trigger('timing')
+            this._trigger('timing')
             callback(this.currentTime)
         }, interval)
     }
@@ -128,19 +120,10 @@ class Timer {
         if (timer === null) return
         clearInterval(timer)
         this.timer = null
-        this.trigger('clear')
+        this._trigger('clear')
     }
 
-    on(eventName, eventCallback) {
-        if (this.type(eventName) && typeof eventCallback === 'function') {
-            if (!this.events[eventName]) {
-                this.events[eventName] = [];
-            }
-            this.events[eventName].push(eventCallback);
-        }
-    }
-
-    type(name) {
+    _type(name) {
         if (this.timerEvents.indexOf(name) !== -1) {
             return 'timer';
         }
@@ -149,13 +132,23 @@ class Timer {
         return null;
     }
 
-    trigger(eventName, eventData = {}) {
+    _trigger(eventName, eventData = {}) {
         if (this.events[eventName] && this.events[eventName].length) {
             this.events[eventName].map((callback) => {
                 callback(eventData)
             })
         }
     }
+
+    on(eventName, eventCallback) {
+        if (this._type(eventName) && typeof eventCallback === 'function') {
+            if (!this.events[eventName]) {
+                this.events[eventName] = [];
+            }
+            this.events[eventName].push(eventCallback);
+        }
+    }
+
 
     createAsyncTimerResource(item) {
         if (!this.timerAsyncRes) {
@@ -172,7 +165,7 @@ class Timer {
     }
 
     startTime(time, callback = () => { }) {
-        this.trigger('start')
+        this._trigger('start')
 
         if (!this.isTimerPlaying) {
             this.isTimerPlaying = true
@@ -190,7 +183,7 @@ class Timer {
 
         this.timer = this._setInterval(() => {
             if (second <= 0) {
-                this.currentTime = "00:00"
+                this.currentTime = '00:00'
                 this._clearInterval(this.timer)
                 this.isTimerPlaying = false
 
@@ -211,10 +204,10 @@ class Timer {
         this._clearInterval(this.timer)
 
         this.timer = this._setInterval(() => {
-            this.currentTime = util.format("HH:mm:ss")
+            this.currentTime = util.format('HH:mm:ss')
             callback(this.currentTime)
         }, 1000)
-        this.trigger('now')
+        this._trigger('now')
     }
 
     updateTime(time, callback = () => { }) {
@@ -223,11 +216,11 @@ class Timer {
         this.startTime(time, callback)
     }
 
-    resetTime(callback) {
+    cancelTime(callback) {
         this._clearInterval(this.timer)
 
-        this.currentTime = "00:00"
+        this.currentTime = '00:00'
         callback(this.currentTime)
-        this.trigger('reset')
+        this._trigger('cancel')
     }
 }

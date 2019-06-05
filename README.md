@@ -7,9 +7,9 @@ var timer = new AyanTimer({
 })
 ```
 
-## 事件触发
+## 事件
 
-ayanTimer有6种事件 `['start', 'reset', "now", 'timing', 'clear']`,可以通过`AyanTimer.prototype.on`添加回调函数
+ayanTimer有6种事件 `['start', 'cancel', "now", 'timing', 'clear']`,可以通过`AyanTimer.prototype.on`添加回调函数
 
 ```javascript
 timer.on('start',function(){

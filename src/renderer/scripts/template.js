@@ -33,7 +33,12 @@ export default class Template {
 
         this.elements.select = {
             plan:this.container.querySelector('.ayan-select-list-plan'),
-            history:this.container.querySelector('.ayan-select-list-plan')
+            history:this.container.querySelector('.ayan-select-list-history')
+        }
+
+        this.elements.setting = {
+            setting:this.container.querySelector('.ayan-setting'),
+            cancel:this.container.querySelector('.ayan-setting-cancel')
         }
 
     }
