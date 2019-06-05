@@ -15,26 +15,4 @@ ayanTimer有6种事件 `['start', 'reset', "now", 'timing', 'clear']`,可以通�
 timer.on('start',function(){
     console.log('start')
 })
-
-```
-
-## Getting started
-
-```shell
-npm install
-```
-
-## Development
-
-```shell
-npm run dev
-npm run dev:web //web
-```
-
-## Packaging
-
-To package the app for the local platform:
-
-```shell
-npm run package:win
 ```
