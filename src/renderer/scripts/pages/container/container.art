@@ -1,3 +1,7 @@
 <div class="{{ styles.component }}">
     {{@ control }}
+
+    {{@ sidebar }}
+
+    {{@ square }}
 </div>

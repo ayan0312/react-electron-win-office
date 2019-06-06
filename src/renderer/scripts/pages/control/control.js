@@ -28,7 +28,7 @@ export default class Control {
                     type: 'default'
                 }).html(),
                 now: new Button({
-                    text: '取消',
+                    text: '查看当前时间',
                     type: 'default'
                 }).html()
             },
@@ -45,7 +45,7 @@ export default class Control {
 
     init() {
         let data = this.data()
-        console.log(this.styles)
+
         this.templateHtml = this.template({
             styles: this.styles,
             buttons: data.buttons,

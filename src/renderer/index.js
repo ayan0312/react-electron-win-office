@@ -7,5 +7,5 @@ import Container from '@/pages/container/container'
 // var timer = new AyanTimer({
 //     container: document.querySelector("#app")  
 // })
-console.log(0)
+
 document.querySelector("#app").innerHTML = new Container().html()

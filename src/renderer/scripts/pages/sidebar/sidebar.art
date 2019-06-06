@@ -1,0 +1,14 @@
+<div class="{{ styles.component }}">
+    {{@ icon}}
+
+    <ul class="{{ styles.list }}">
+    {{ each title }}
+        <h4 class="{{  $value.primary.className }}" >{{ $value.primary.title }}</h4>
+        {{ each $value.secondary }}
+        <li class="{{ $value.className }}">
+            <span>{{ $value.title }}</span>
+        </li>
+        {{ /each }}
+    {{ /each }}
+    </ul>
+</div>

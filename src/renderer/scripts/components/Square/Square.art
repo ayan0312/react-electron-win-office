@@ -1,0 +1,4 @@
+<div class="{{ styles.component}}">
+    <i class="{{ styles.before }}"></i>
+    <i class="{{ styles.after }}"></i>
+</div>
