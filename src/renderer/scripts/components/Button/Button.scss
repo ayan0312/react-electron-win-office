@@ -1,0 +1,38 @@
+.component {
+    -webkit-app-region: no-drag;
+    outline: none;
+    font-family: PoppinsLight, Arial, Helvetica, sans-serif;
+    padding: 8px 20px;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 160px;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.025);
+    user-select: none;
+    cursor: pointer;
+    transition: all .3s;
+    border: 1px solid transparent;
+    color: #803b39;
+
+    &.primary {
+        background: #dc995a;
+        border-color: #dc995a;
+    }
+
+    &.primary:hover {
+        background: #e8a76a;
+    }
+
+    &.default {
+        background: #fff;
+        border-color: #d9d9d9;
+    }
+
+    &.default:hover {
+        border-color: #803b39;
+    }
+}

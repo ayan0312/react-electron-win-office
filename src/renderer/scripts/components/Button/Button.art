@@ -1,0 +1,1 @@
+<button class="{{ styles.component }} {{ styles[setting.type] }} {{ setting.className }}" >{{ setting.text }}</button>

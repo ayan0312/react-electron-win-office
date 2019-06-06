@@ -30,13 +30,17 @@ rules.push({
 
 rules.push({
     test: /\.scss/,
+    include: paths.rendererPath,
     use: getStyleLoaders([
         {
             loader: 'css-loader',
             options: {
                 importLoaders: 1,
-                minimize: true,
-                sourceMap: true
+                sourceMap: env.isDev,
+                modules: true,
+                localIdentName: env.isDev
+                    ? '[name]-[local]-[hash:base64:5]'
+                    : '[hash:base64:5]'
             }
         },
         {
@@ -47,7 +51,12 @@ rules.push({
                 ]
             }
         },
-        'sass-loader'
+        {
+            loader: 'sass-loader',
+            options: {
+                sourceMap: env.isDev
+            }
+        }
     ])
 })
 
@@ -58,6 +67,7 @@ rules.push({
             loader: 'css-loader',
             options: {
                 sourceMap: env.isDev
+
             }
         }
     ])
@@ -160,7 +170,10 @@ const webpackConfig = {
             'node_modules',
             paths.srcPath,
             paths.rendererPath
-        ]
+        ],
+        alias: {
+            '@': path.resolve(paths.rendererPath, 'scripts'),
+        }
     },
     module: {
         rules

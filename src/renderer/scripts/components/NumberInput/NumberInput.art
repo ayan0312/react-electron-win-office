@@ -1,0 +1,4 @@
+<input class="
+    {{ styles.component }} 
+    {{ setting.className }}" type="number" value="{{ setting.number }}"
+/>

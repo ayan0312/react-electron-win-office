@@ -1,4 +1,5 @@
 <div class="ayan-date-mark">
+    <p class="{{ styles.test }}"></p>
     <div class="ayan-date-mark-info">
         {{ selectDate.currentTime }}
     </div>

@@ -1,5 +1,6 @@
 import util from '../../util'
 import dateTemplate from './SelectDateInput.art'
+import styles from './SelectDateInput.scss'
 import EventsTemplateClass from '../../events'
 
 export default class SelectDateInput{
@@ -80,6 +81,7 @@ export default class SelectDateInput{
 
     static html(){
         return dateTemplate({
+            styles:styles,
             selectDate:SelectDateInput.dateFormat('00:00:00')
         })
     }

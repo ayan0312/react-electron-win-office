@@ -1,0 +1,23 @@
+
+
+.component{
+    margin-top: 70px;
+    position: relative;
+    z-index: 20;
+    
+
+    &.time {
+        color: rgb(130, 57, 53);
+        font-weight: bold;
+        font-size: 60px;
+        user-select: none;
+    }
+
+    &.option {
+        color: rgb(130, 57, 53);
+        font-weight: bold;
+        user-select: none;
+    }
+
+    &.button {}
+}

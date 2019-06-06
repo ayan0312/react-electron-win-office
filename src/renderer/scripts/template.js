@@ -1,4 +1,5 @@
 import tplTimer from '../template/timer.art'
+import '../styles/index.scss'
 import Icons from './icons'
 import SelectDateInput from './components/SelectDateInput/SelectDateInput'
 
