@@ -31,7 +31,7 @@ export default class IconButton {
                 if (['rotate', 'scale'].includes(type)) {
                     return this.methods()[this.setting.type]
                 }
-                return
+                return ''
             }
         }
     }

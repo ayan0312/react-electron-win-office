@@ -5,5 +5,11 @@
 
     {{@ setting }}
 
+    {{@ history }}
+
+    {{@ exports }}
+
+    {{@ imports}}
+
     {{@ square }}
 </div>

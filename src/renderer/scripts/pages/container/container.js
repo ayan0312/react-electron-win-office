@@ -4,6 +4,9 @@ import styles from './container.scss'
 import Control from '@/pages/control/control'
 import Sidebar from '@/pages/sidebar/sidebar'
 import Setting from '@/pages/setting/setting'
+import History from '@/pages/history/history'
+import Export from '@/pages/export/export'
+import Import from '@/pages/import/import'
 
 import Square from '@/components/Square/Square'
 
@@ -25,6 +28,9 @@ export default class Container extends Pages {
             control:new Control(),
             sidebar:new Sidebar(),
             setting:new Setting(),
+            history:new History(),
+            export:new Export(),
+            import:new Import(),
             square:new Square()
         }
     }
@@ -37,6 +43,9 @@ export default class Container extends Pages {
             control:data.control.html(),
             sidebar:data.sidebar.html(),
             setting:data.setting.html(),
+            history:data.history.html(),
+            exports:data.export.html(),
+            imports:data.import.html(),
             square:data.square.html()
         })
 

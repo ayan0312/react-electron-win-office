@@ -1,66 +1,41 @@
 import util from '@/core/util'
-import dateTemplate from './SelectDateInput.art'
+
+import template from './SelectDateInput.art'
 import styles from './SelectDateInput.scss'
-import EventsTemplateClass from '@/core/events'
+
+import { Components } from '@/core/super/components'
 
 import Button from '@/components/Button/Button'
 
-export default class SelectDateInput {
-    constructor(template) {
-        this.container = template.container
+export default class SelectDateInput extends Components{
+    constructor(setting = {
+        date:'00:00:00'
+    }) {
+        super()
+
         this.template = template
-        this.elements = {}
-        this.events = new EventsTemplateClass('dateInput', ['submit', 'input'])
+        this.styles = styles
+        this.setting = setting
 
-        this.dateString = '00:00:00 凌晨'
-
-        this._init()
+        this.init()
     }
 
-    _init() {
+    init(){
+        let selectDate = SelectDateInput.dateFormat(setting.date)
 
-        this.selectDate = SelectDateInput.dateFormat()
-
-        this.elements.date = this.container.querySelector('.ayan-date-mark')
-
-        this.elements.time = this.container.querySelector('.ayan-date-mark-info')
-        this.elements.button = this.container.querySelector('.ayan-date-mark-button')
-
-        this.elements.list = {
-            hours: this.container.querySelector('.ayan-date-mark-select-hour'),
-            minutes: this.container.querySelector('.ayan-date-mark-select-minutes'),
-            seconds: this.container.querySelector('.ayan-date-mark-select-seconds')
-        }
-
-        this.bindEvent()
-    }
-
-    bindEvent() {
-        this.elements.button.addEventListener('click', () => {
-            this.events.trigger('submit', this.dateString)
-            this.elements.date.style.display = 'none'
+        this.templateHtml = template({
+            styles: styles,
+            selectDate: selectDate,
+            button: new Button({
+                text:'确定',
+                type:'default',
+                className:styles.button
+            }).html()
         })
     }
 
-    set dateInputValue(value) {
-        this.dateInputChange(value)
-    }
-
-    get dateInputValue() {
-        return this.dateString
-    }
-
-    dateInputChange() {
-
-        this.resetDateSelect({
-            hours: [],
-            minutes: [],
-            seconds: []
-        })
-    }
-
-    resetDateSelect(options = { hours: [], minutes: [], seconds: [] }) {
-
+    html(){
+        return this.templateHtml
     }
 
     static show(ele) {
@@ -86,13 +61,13 @@ export default class SelectDateInput {
     static html() {
         let selectDate = SelectDateInput.dateFormat('00:00:00')
 
-        return dateTemplate({
+        return template({
             styles: styles,
             selectDate: selectDate,
             button: new Button({
                 text:'确定',
                 type:'default',
-                className:''
+                className:styles.button
             }).html()
         })
     }

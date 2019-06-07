@@ -49,10 +49,8 @@
         right:20px;
         z-index: 24;
     }
-
-    .menuButton:hover+.list,.list:hover{
-        &{
-            right:0;
-        }
+    
+    &>.menuButton:hover+.list,.list:hover{
+        right:0;
     }
 }

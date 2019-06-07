@@ -23,11 +23,11 @@ export default [
         secondary:[
             {
                 title:'导出数据',
-                className:''
+                className:'export'
             },
             {
                 title:'导入数据',
-                className:''
+                className:'import'
             }
         ]
     },

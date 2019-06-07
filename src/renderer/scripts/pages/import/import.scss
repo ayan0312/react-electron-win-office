@@ -1,0 +1,27 @@
+.component {
+    position: absolute;
+    background: #fff;
+    bottom: -100%;
+    left: 0;
+    height: 200px;
+    transition: all 1s;
+    width: 100%;
+    box-shadow: 0 0 8px 0 rgba(7, 17, 27, 0.07) inset;
+    z-index: 30;
+
+    &>.cancelButton {
+        top: 20px;
+        left: 20px;
+
+        &>svg {
+            transform: rotate(180deg);
+        }
+
+        &:hover {
+            top: 25px;
+            left: 25px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

@@ -3,7 +3,7 @@ import styles from './Button.scss'
 
 import { Components } from '@/core/super/components'
 
-export default class Button extends Components {
+export default class Button extends Components{
     constructor(setting = {
         text: 'button',
         type: 'default',
@@ -15,6 +15,8 @@ export default class Button extends Components {
         this.styles = styles
         this.setting = setting
 
+        this.clickEvents = []
+
         this.init()
     }
 
@@ -24,9 +26,17 @@ export default class Button extends Components {
             setting: this.setting
         })
 
-        super.mounted(() => {
-            
+        super.mounted(()=>{
+            super.query(styles.component).addEventListener('click',(e)=>{
+                for(let index in this.clickEvents){
+                    this.clickEvents[index](e)
+                }
+            })
         })
+    }
+
+    click(callback){
+        this.clickEvents.push(callback)
     }
 
     html() {

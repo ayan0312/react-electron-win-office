@@ -6,10 +6,14 @@ import Button from '@/components/Button/Button'
 import TextInput from '@/components/TextInput/TextInput'
 import DateButton from '@/components/DateButton/DateButton'
 
+import { Components } from '@/core/super/components'
+
 import upSvgIcon from '@/assets/up.svg'
 
-export default class Setting {
+export default class Setting extends Components{
     constructor() {
+        super()
+
         this.template = template
         this.styles = styles
 
@@ -57,14 +61,12 @@ export default class Setting {
             end:data.date.end.html()
         })
 
-        
-    }
-
-    bindEvents(data) {
-        let start = data.date.start
-        let end = data.date.end
-
-        start.bindEvents()
+        super.mounted(()=>{
+            
+            document.querySelector('.'+styles.cancelButton).addEventListener('click',function(){
+                document.querySelector('.'+styles.component).style.top = '-100%'
+            })
+        })
     }
 
     html() {
