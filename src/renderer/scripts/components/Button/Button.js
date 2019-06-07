@@ -1,12 +1,16 @@
 import template from './Button.art'
 import styles from './Button.scss'
 
-export default class Button {
+import { Components } from '@/core/super/components'
+
+export default class Button extends Components {
     constructor(setting = {
-        text:'button',
-        type:'default',
-        classList:''
+        text: 'button',
+        type: 'default',
+        classList: ''
     }) {
+        super()
+
         this.template = template
         this.styles = styles
         this.setting = setting
@@ -17,24 +21,28 @@ export default class Button {
     init() {
         this.templateHtml = this.template({
             styles: this.styles,
-            setting:this.setting
+            setting: this.setting
+        })
+
+        super.mounted(() => {
+            
         })
     }
 
-    html(){
+    html() {
         return this.templateHtml
     }
 
-    data(){
+    data() {
         return {
 
         }
     }
 
-    method(){
+    method() {
         return {
-            
+
         }
     }
-    
+
 }

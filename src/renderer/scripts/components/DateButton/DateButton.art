@@ -1,0 +1,2 @@
+<span class="{{ styles.className }} {{ styles.component }}">{{ setting.date }}</span>
+{{@ selectDate }}

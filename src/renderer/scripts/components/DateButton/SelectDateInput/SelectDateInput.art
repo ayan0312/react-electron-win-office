@@ -1,23 +1,20 @@
-<div class="ayan-date-mark">
-    <p class="{{ styles.test }}"></p>
-    <div class="ayan-date-mark-info">
-        {{ selectDate.currentTime }}
-    </div>
-    <button class="ayan-date-mark-button ayan-button ayan-default-button">确定</button>
-    <div class="ayan-date-mark-list">
-        <div class="ayan-date-mark-select">
-            <ul class="ayan-date-mark-select-hours">
+<div class="{{ styles.component }}">
+
+    {{@ button }}
+    <div class="{{ styles.dateTypes }}">
+        <div class="{{ styles.typeSelect }}">
+            <ul>
             {{ each selectDate.minTime.hours }}
                 <li class=
                 {{if $index == '0' }}
-                    'ayan-current'
+                    'current'
                 {{/if}}
                 >{{ $value }}</li>
             {{ /each }}
             </ul>
         </div>
-        <div class="ayan-date-mark-select">
-            <ul class="ayan-date-mark-select-minutes">
+        <div class="{{ styles.typeSelect }}">
+            <ul>
             {{ each selectDate.minTime.minutes }}
                 <li class=
                 {{if $index == '0' }}
@@ -27,8 +24,8 @@
             {{ /each }}
             </ul>
         </div>
-        <div class="ayan-date-mark-select">
-            <ul class="ayan-date-mark-select-seconds">
+        <div class="{{ styles.typeSelect }}">
+            <ul>
             {{ each selectDate.minTime.seconds }}
                 <li class=
                 {{if $index == '0' }}

@@ -1,7 +1,7 @@
 import util from './util'
 import Template from './template'
 import Storage from './storage'
-import elements from './element/index'
+import elements from '../element/index'
 
 export const version = '0.2.0'
 

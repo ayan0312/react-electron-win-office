@@ -18,7 +18,7 @@
 		"package:win": "npm run build && electron-builder build --win --x64",
 		"clean:build": "rimraf ./build",
 		"clean:release": "rimraf ./release",
-		"test": "mocha"
+		"test": "istanbul cover node_modules/mocha/bin/_mocha"
 	},
 	"build": {
 		"productName": "ayanTimer",
@@ -69,10 +69,10 @@
 		"electron-builder": "^20.41.0",
 		"file-loader": "^3.0.1",
 		"html-webpack-plugin": "^3.2.0",
+		"istanbul": "^0.4.5",
 		"merge": "^1.2.1",
 		"mini-css-extract-plugin": "^0.7.0",
 		"mocha": "^6.1.4",
-		"mochawesome": "^3.1.2",
 		"node-sass": "^4.12.0",
 		"node-sass-utils": "^1.1.2",
 		"postcss-loader": "^3.0.0",

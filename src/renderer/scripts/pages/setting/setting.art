@@ -1,0 +1,16 @@
+<div class="{{ styles.component }}">
+    {{@ icon }}
+    <div class="{{ styles.input }}">
+        <h4>设置</h4>
+
+        <p>起始时间：</p>
+        {{@ start }}
+
+        <p>结束时间：</p>
+        {{@ end }}
+
+        <p>此次任务名称：</p>
+        {{@ input }}
+        {{@ button }}
+    </div>
+</div>

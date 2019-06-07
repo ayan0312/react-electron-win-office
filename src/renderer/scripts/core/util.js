@@ -1,5 +1,3 @@
-let window = {}
-
 const util = {
     format(fmt) {
 

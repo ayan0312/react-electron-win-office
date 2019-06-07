@@ -8,4 +8,4 @@ import Container from '@/pages/container/container'
 //     container: document.querySelector("#app")  
 // })
 
-document.querySelector("#app").innerHTML = new Container().html()
+new Container(document.querySelector("#app"))

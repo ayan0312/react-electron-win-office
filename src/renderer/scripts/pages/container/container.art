@@ -3,5 +3,7 @@
 
     {{@ sidebar }}
 
+    {{@ setting }}
+
     {{@ square }}
 </div>

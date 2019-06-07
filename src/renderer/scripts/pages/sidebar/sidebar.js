@@ -27,6 +27,10 @@ export default class Sidebar {
         })
     }
 
+    bindEvents(){
+        
+    }
+
     html(){
         return this.templateHtml
     }
