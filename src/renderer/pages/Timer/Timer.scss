@@ -1,0 +1,25 @@
+.component {
+    width: 100%;
+    position: relative;
+    z-index: 21;
+    text-align: center;
+
+    & {
+        .time {
+            color: rgb(130, 57, 53);
+            font-weight: bold;
+            font-size: 50px;
+            user-select: none;
+        }
+
+        .options {
+            color: rgb(130, 57, 53);
+            font-weight: bold;
+            user-select: none;
+        }
+
+        .controls {}
+    }
+
+
+}
