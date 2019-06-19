@@ -1,3 +1,0 @@
-<span class="{{ styles.component }} {{ type }} {{ className }}">
-        {{@ icon }}
-</span>

@@ -1,1 +1,0 @@
-<input class="{{ styles.component }} {{ setting.className }}" value="{{ setting.value }}" type="text" placeholder="{{ setting.placeholder }}" />

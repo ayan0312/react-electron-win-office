@@ -1,4 +1,0 @@
-<div class="{{ styles.component }}">
-    {{@ icon}}
-    <h4>导入记录</h4>
-</div>
