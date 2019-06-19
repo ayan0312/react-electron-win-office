@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { ResourcesDirectory, Env } from './util/env';
-import { config } from '../shared/config';
-import windowStyles from '../shared/windowStyles';
+import { ResourcesDirectory, Env } from './env';
+import { config } from '../../shared/config';
+import windowStyles from '../../shared/windowStyles';
 
 let mainWindow: any = null;
 const resourcesDirectory: ResourcesDirectory = new ResourcesDirectory();
@@ -16,9 +16,9 @@ export class ElectronWindow {
         return this.instance;
     }
 
-    public main() {
+    public init() {
         this.initBaseEnvironment();
-        this.listenRenderer()
+        this.bindEvents();
     }
 
     public getBrowserWindow() {
@@ -39,18 +39,25 @@ export class ElectronWindow {
         });
     }
 
-    private listenRenderer() {
+    private bindEvents() {
         ipcMain.on('setAlwaysOnTop', (event: any, isPushpin: boolean) => {
-            mainWindow.setAlwaysOnTop(isPushpin)
-        })
+            mainWindow.setAlwaysOnTop(isPushpin);
+        });
 
-        ipcMain.on('closeWindow',(event:any,arg:any)=>{
-            mainWindow.close()
-        })
+        ipcMain.on('closeWindow', (event: any, arg: any) => {
+            mainWindow.close();
+        });
+
+        ipcMain.on('minimizeWindow', (event: any, arg: any) => {
+            mainWindow.minimize();
+        });
+
+        ipcMain.on('setWindowSize', (event: any, arg: any) => {
+            mainWindow.setSize(arg.width, arg.height, true);
+        });
     }
 
     private createWindow() {
-
         mainWindow = new BrowserWindow({
             width: Env.isDev() ? windowStyles.MAX_WIDTH : windowStyles.WINDOW_WIDTH,
             height: windowStyles.WINDOW_HEIGHT,
@@ -58,7 +65,8 @@ export class ElectronWindow {
             backgroundColor: windowStyles.BACKGROUND_COLOR,
 
             webPreferences: {
-                nodeIntegration: true
+                devTools: Env.isDev(),
+                nodeIntegration: true,
             },
 
             show: false,

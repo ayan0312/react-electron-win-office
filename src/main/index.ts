@@ -1,5 +1,5 @@
-import { ElectronWindow } from './mainWindow';
+import { ElectronWindow } from './util/mainWindow';
 
 const win: ElectronWindow = ElectronWindow.getInstance();
 
-win.main();
+win.init();
