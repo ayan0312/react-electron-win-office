@@ -8,8 +8,6 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 350px;
-    height: 700px;
     overflow: hidden;
 }
 

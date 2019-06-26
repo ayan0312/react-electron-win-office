@@ -3,6 +3,7 @@ dist
 .*_cache*
 coverage
 .idea
+.vs
 release
 package-lock.json
 yarn-error.log

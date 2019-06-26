@@ -15,21 +15,23 @@ interface IProps {
 class TitleBar extends React.Component<IProps> {
     public state = {
         isPushpin: false,
+        isFullScreen: false,
     };
 
-    private pushpin() {
-        const nowPushpin = !this.state.isPushpin;
+    private isState(state: any, changeState: any) {
+        const nowState = !changeState;
 
         this.setState({
-            isPushpin: nowPushpin,
+            [state]: nowState,
         });
-        return nowPushpin;
+
+        return nowState;
     }
 
     private pushpinChange() {
         const { onClick = () => {} } = this.props;
         const pushpinClick = (e: any) => {
-            const isPushpin = this.pushpin();
+            const isPushpin = this.isState('isPushpin', this.state.isPushpin);
             ipcRenderer.send('setAlwaysOnTop', isPushpin);
             onClick(e);
         };
@@ -48,6 +50,13 @@ class TitleBar extends React.Component<IProps> {
         };
     }
 
+    private fullScreenWindow() {
+        return () => {
+            const isFullScreen = this.isState('isFullScreen', this.state.isFullScreen);
+            ipcRenderer.send('fullScreenWindow', isFullScreen);
+        };
+    }
+
     public render() {
         const { ...props } = this.props;
 
@@ -56,7 +65,7 @@ class TitleBar extends React.Component<IProps> {
         return (
             <div className={styles.component} {...props}>
                 <Popconfirm
-                    placement="leftTop"
+                    placement="bottomRight"
                     title={'确定退出番茄工作法吗？'}
                     onConfirm={this.closeWindow()}
                     okText="退出"
@@ -67,6 +76,18 @@ class TitleBar extends React.Component<IProps> {
                     </div>
                 </Popconfirm>
 
+                <div className={styles.button} onClick={this.fullScreenWindow()}>
+                    {this.state.isFullScreen ? (
+                        <Icon type="fullscreen-exit" />
+                    ) : (
+                        <Icon type="fullscreen" />
+                    )}
+                </div>
+
+                <div className={styles.button} onClick={this.minimizeWindow()}>
+                    <Icon type="minus" />
+                </div>
+
                 <div
                     className={cx(styles.button, {
                         [styles.buttonClick]: this.state.isPushpin,
@@ -74,10 +95,6 @@ class TitleBar extends React.Component<IProps> {
                     onClick={this.pushpinChange()}
                 >
                     <Icon type="pushpin" theme="filled" />
-                </div>
-
-                <div className={styles.button} onClick={this.minimizeWindow()}>
-                    <Icon type="minus" />
                 </div>
             </div>
         );

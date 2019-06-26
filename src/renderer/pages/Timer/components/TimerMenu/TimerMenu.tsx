@@ -24,6 +24,9 @@ export default class TimerMenu extends React.Component<IProps> {
                 <li>
                     <span>导入数据</span>
                 </li>
+                <li>
+                    <span>更多设置</span>
+                </li>
                 <h4>关于</h4>
                 <li>
                     <span>赞助</span>

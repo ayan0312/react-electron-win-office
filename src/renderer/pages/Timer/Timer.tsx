@@ -58,18 +58,19 @@ class Timer extends React.Component<IPrors> {
                     </p>
                 </div>
                 <div className={styles.controls}>
+                    <Button type="primary" text="开始计划">
+                        21
+                    </Button>
+                    <Button text="设置计划" onClick={this.showDrawer}>
+                        21
+                    </Button>
                     <Button type="primary" text="工作">
                         21
                     </Button>
                     <Button type="primary" text="休息">
                         21
                     </Button>
-                    <Button type="primary" text="取消">
-                        21
-                    </Button>
-                    <Button text="设置" onClick={this.showDrawer}>
-                        21
-                    </Button>
+                    <Button text="取消">21</Button>
                 </div>
                 <Drawer
                     placement="right"

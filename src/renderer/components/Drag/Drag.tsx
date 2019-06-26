@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 const Drag = () => {
     return (
         <div className={styles.component}>
-            <Icon type="drag" style={{ fontSize: '30px', color: '#585858' }} />
+            <Icon type="drag" className={styles.dragIcon} />
         </div>
     );
 };

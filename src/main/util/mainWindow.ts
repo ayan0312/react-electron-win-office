@@ -3,7 +3,7 @@ import { ResourcesDirectory, Env } from './env';
 import { config } from '../../shared/config';
 import windowStyles from '../../shared/windowStyles';
 
-let mainWindow: any = null;
+let mainWindow: BrowserWindow | null = null;
 const resourcesDirectory: ResourcesDirectory = new ResourcesDirectory();
 
 export class ElectronWindow {
@@ -17,7 +17,7 @@ export class ElectronWindow {
     }
 
     public init() {
-        this.initBaseEnvironment();
+        this.baseEnvironment();
         this.bindEvents();
     }
 
@@ -25,7 +25,7 @@ export class ElectronWindow {
         return mainWindow;
     }
 
-    private initBaseEnvironment() {
+    private baseEnvironment() {
         app.on('ready', this.createWindow);
         app.on('window-all-closed', () => {
             if (process.platform !== 'darwin') {
@@ -40,20 +40,32 @@ export class ElectronWindow {
     }
 
     private bindEvents() {
-        ipcMain.on('setAlwaysOnTop', (event: any, isPushpin: boolean) => {
-            mainWindow.setAlwaysOnTop(isPushpin);
-        });
-
-        ipcMain.on('closeWindow', (event: any, arg: any) => {
+        // window
+        ipcMain.on('closeWindow', () => {
+            if (!mainWindow) return;
             mainWindow.close();
         });
 
-        ipcMain.on('minimizeWindow', (event: any, arg: any) => {
+        ipcMain.on('minimizeWindow', () => {
+            if (!mainWindow) return;
             mainWindow.minimize();
         });
 
+        ipcMain.on('fullScreenWindow', (event: any, isFullScreen: any) => {
+            if (!mainWindow) return;
+            mainWindow.setKiosk(isFullScreen);
+        });
+
+        // windowSize
         ipcMain.on('setWindowSize', (event: any, arg: any) => {
+            if (!mainWindow) return;
             mainWindow.setSize(arg.width, arg.height, true);
+        });
+
+        // isWindowTop
+        ipcMain.on('setAlwaysOnTop', (event: any, isPushpin: boolean) => {
+            if (!mainWindow) return;
+            mainWindow.setAlwaysOnTop(isPushpin);
         });
     }
 
@@ -68,12 +80,22 @@ export class ElectronWindow {
                 devTools: Env.isDev(),
                 nodeIntegration: true,
             },
-
+            alwaysOnTop: false,
             show: false,
+            skipTaskbar: false,
+
+            /*
+             * FullScreen:
+             * fullscreen or kiosk
+             */
+            fullscreen: false,
+            kiosk: false,
+
+            focusable: true,
             resizable: false,
             movable: true,
             maximizable: false,
-            fullscreenable: false,
+            fullscreenable: true,
             autoHideMenuBar: true,
             titleBarStyle: 'hiddenInset',
             frame: false,
