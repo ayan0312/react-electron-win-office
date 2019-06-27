@@ -7,3 +7,5 @@ coverage
 release
 package-lock.json
 yarn-error.log
+test
+tests
