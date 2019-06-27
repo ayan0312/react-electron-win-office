@@ -6,9 +6,6 @@ import Button from '../../components/Button/Button';
 import NumberInput from '../../components/NumberInput/NumberInput';
 import TimerMenu from './components/TimerMenu/TimerMenu';
 
-import { Drawer } from 'antd';
-import 'antd/lib/drawer/style/css';
-
 interface IPrors {}
 
 class Timer extends React.Component<IPrors> {
@@ -58,31 +55,12 @@ class Timer extends React.Component<IPrors> {
                     </p>
                 </div>
                 <div className={styles.controls}>
-                    <Button type="primary" text="开始计划">
-                        21
-                    </Button>
-                    <Button text="设置计划" onClick={this.showDrawer}>
-                        21
-                    </Button>
-                    <Button type="primary" text="工作">
-                        21
-                    </Button>
-                    <Button type="primary" text="休息">
-                        21
-                    </Button>
-                    <Button text="取消">21</Button>
+                    <Button type="primary" text="开始计划" />
+                    <Button type="primary" text="工作" />
+                    <Button text="取消" />
+                    <Button text="设置" onClick={this.showDrawer} />
                 </div>
-                <Drawer
-                    placement="right"
-                    closable={false}
-                    zIndex={98}
-                    width={150}
-                    bodyStyle={{ padding: '30px 0' }}
-                    onClose={this.onClose}
-                    visible={this.state.visible}
-                >
-                    <TimerMenu />
-                </Drawer>
+                <TimerMenu onClose={this.onClose} visible={this.state.visible} />
             </div>
         );
     }

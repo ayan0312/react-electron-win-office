@@ -56,12 +56,6 @@ export class ElectronWindow {
             mainWindow.setKiosk(isFullScreen);
         });
 
-        // windowSize
-        ipcMain.on('setWindowSize', (event: any, arg: any) => {
-            if (!mainWindow) return;
-            mainWindow.setSize(arg.width, arg.height, true);
-        });
-
         // isWindowTop
         ipcMain.on('setAlwaysOnTop', (event: any, isPushpin: boolean) => {
             if (!mainWindow) return;
