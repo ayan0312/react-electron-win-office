@@ -56,9 +56,11 @@ class Timer extends React.Component<IPrors> {
                 </div>
                 <div className={styles.controls}>
                     <Button type="primary" text="开始计划" />
+                    <Button text="选择计划" />
+                    <Button text="设置" onClick={this.showDrawer} />
+
                     <Button type="primary" text="工作" />
                     <Button text="取消" />
-                    <Button text="设置" onClick={this.showDrawer} />
                 </div>
                 <TimerMenu onClose={this.onClose} visible={this.state.visible} />
             </div>

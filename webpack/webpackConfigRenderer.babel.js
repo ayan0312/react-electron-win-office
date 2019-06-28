@@ -155,15 +155,4 @@ const webpackConfig = {
     }
 }
 
-/**
- * Adjust rendererConfig for development settings
- */
-if (process.env.NODE_ENV !== 'production') {
-    webpackConfig.plugins.push(
-        new webpack.DefinePlugin({
-            '__static': `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
-        })
-    )
-}
-
 export default webpackConfig
