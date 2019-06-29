@@ -32,19 +32,32 @@ export default class TimerMenu extends React.Component<IProps> {
         },
         currentSettingName: '',
         visible: false,
+        prevSelectElement: null,
     };
 
     private showCurrentSetting() {
         return (e: any) => {
+            const { prevSelectElement } = this.state;
             const name = e.currentTarget.getAttribute('data-name');
+
+            if (prevSelectElement !== null && prevSelectElement !== e.currentTarget) {
+                prevSelectElement.classList.remove(styles.current);
+            }
+
+            e.currentTarget.classList.add(styles.current);
+
             this.setState({
                 currentSettingName: name,
+                prevSelectElement: e.currentTarget,
                 visible: true,
             });
         };
     }
 
     private onClose = () => {
+        const { prevSelectElement } = this.state;
+        prevSelectElement.classList.remove(styles.current);
+
         this.setState({
             visible: false,
         });

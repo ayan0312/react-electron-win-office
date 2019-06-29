@@ -13,7 +13,7 @@ import {
     Sponsor,
 } from './components/index';
 
-import { Drawer } from 'antd';
+import { Drawer, Form } from 'antd';
 import 'antd/lib/drawer/style/css';
 
 interface IPrors {
@@ -26,7 +26,7 @@ export default class TimerSetting extends React.Component<IPrors> {
     private selectSetting(selectOptionsName: string) {
         switch (selectOptionsName) {
             case 'setPlan':
-                return <SetPlan />;
+                return <SetPlan age={1} name={'2'} />;
             case 'historyPlan':
                 return <HistoryPlan />;
             case 'export':
@@ -50,8 +50,9 @@ export default class TimerSetting extends React.Component<IPrors> {
                 <Drawer
                     placement="right"
                     closable={true}
-                    width={260}
+                    width={230}
                     zIndex={51}
+                    mask={false}
                     onClose={this.props.onClose}
                     visible={this.props.visible}
                 >

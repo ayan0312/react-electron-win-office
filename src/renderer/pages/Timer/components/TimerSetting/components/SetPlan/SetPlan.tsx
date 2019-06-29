@@ -2,17 +2,34 @@ import React from 'react';
 
 import styles from './SetPlan.scss';
 
-import { DatePicker } from 'antd';
+import { DatePicker, Form } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
 import 'antd/lib/date-picker/style/css';
 
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+interface UserFormProps extends FormComponentProps {
+    age: number;
+    name: string;
+}
 
-interface IProps {}
-
-export default class SetPlan extends React.Component<IProps> {
+class SetPlan extends React.Component<UserFormProps, any> {
     public onChange = (date: any, dateString: any) => {};
 
+    handleSubmit = (e: any) => {
+        e.preventDefault();
+        this.props.form.validateFields((err: any, values: any) => {
+            if (err) {
+                return;
+            }
+        });
+    };
+
     render() {
+        const { getFieldDecorator } = this.props.form;
+
+        const config = {
+            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+        };
+
         return (
             <div className={styles.component}>
                 <h4>设置计划</h4>
@@ -20,16 +37,47 @@ export default class SetPlan extends React.Component<IProps> {
                     <strong>注意：</strong>
                     如果不填些日期范围的话，会默认添加到基础计划，可通过选择开始。
                 </p>
-                <p style={{ margin: '15px 0 5px 0' }}>
-                    <strong>开始日期：</strong>
-                </p>
-                <DatePicker onChange={this.onChange} />
-                <p style={{ margin: '15px 0 5px 0' }}>
-                    <strong>结束日期：</strong>
-                </p>
-                <DatePicker onChange={this.onChange} />
-                <br />
+
+                <div className={styles.line}></div>
+
+                <Form onSubmit={this.handleSubmit} className={styles.form}>
+                    <div className={styles.list}>
+                        <p>
+                            <strong>开始日期：</strong>
+                        </p>
+                        <Form.Item>
+                            {getFieldDecorator('date-time-picker', config)(
+                                <DatePicker
+                                    className={styles.dateInput}
+                                    onChange={this.onChange}
+                                />,
+                            )}
+                        </Form.Item>
+                    </div>
+                    <div className={styles.list}>
+                        <p>
+                            <strong>结束日期：</strong>
+                        </p>
+                        <Form.Item>
+                            {getFieldDecorator('date-time-picker', config)(
+                                <DatePicker
+                                    className={styles.dateInput}
+                                    onChange={this.onChange}
+                                />,
+                            )}
+                        </Form.Item>
+                    </div>
+                    <div className={styles.list}>
+                        <p>
+                            <strong>备注：</strong>
+                        </p>
+                        <input type="text" />
+                    </div>
+                </Form>
             </div>
         );
     }
 }
+const App = Form.create<UserFormProps>({})(SetPlan);
+
+export default App;

@@ -40,6 +40,13 @@
             font-weight: 600;
             background-color: #fafafa;
         }
+
+        &>li.current {
+            color: rgba(0, 0, 0, 0.65);
+            font-weight: 600;
+            background-color: #f4f4f4;
+        }
+        
     }
 
 
