@@ -1,6 +1,6 @@
 module.exports = function(config) {
   const configuration = {
-    basePath: "",
+    basePath: ".",
     frameworks: ["mocha", "chai", "karma-typescript"],
     preprocessors: {
       "**/*.ts": "karma-typescript", // *.tsx for React Jsx
