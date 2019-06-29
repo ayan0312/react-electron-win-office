@@ -1,4 +1,4 @@
-module.exports = function(config) {
+export default (config: any) => {
   const configuration = {
     basePath: ".",
     frameworks: ["mocha", "chai", "karma-typescript"],
