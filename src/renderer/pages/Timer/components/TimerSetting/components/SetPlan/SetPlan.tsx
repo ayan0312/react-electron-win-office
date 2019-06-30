@@ -69,6 +69,18 @@ class SetPlan extends React.Component<UserFormProps, any> {
                     </div>
                     <div className={styles.list}>
                         <p>
+                            <strong>工作时长</strong>
+                        </p>
+                        <input type="text" />
+                    </div>
+                    <div className={styles.list}>
+                        <p>
+                            <strong>休息时长</strong>
+                        </p>
+                        <input type="text" />
+                    </div>
+                    <div className={styles.list}>
+                        <p>
                             <strong>备注：</strong>
                         </p>
                         <input type="text" />

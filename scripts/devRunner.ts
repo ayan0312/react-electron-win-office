@@ -1,16 +1,66 @@
 import path from 'path';
 import webpack from 'webpack';
 import electron from 'electron';
-
 import chalk from 'chalk';
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 
+import WebpackDevServer from 'webpack-dev-server';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 import paths from './utils/paths';
-import { logStats } from './utils/log';
+import { logStats, greeting } from './utils/log';
+
 import webpackConfigMain from './webpack/webpackConfigMain';
+import webpackClientConfig from './webpack/webpackDevConfig';
 
 let electronProcess: ChildProcessWithoutNullStreams | null = null;
 let manualRestart: boolean = false;
+let hotMiddleware: webpackHotMiddleware.EventStream;
+
+function startRenderer() {
+    return new Promise((resolve, reject) => {
+        if (webpackClientConfig.plugins === undefined) {
+            webpackClientConfig.plugins = [];
+        }
+
+        webpackClientConfig.plugins.push(
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: path.resolve(paths.rootPath, './src/renderer/index.html'),
+                minify: {
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                },
+                nodeModules: path.resolve(paths.rootPath, './node_modules'),
+            }),
+        );
+
+        const compiler = webpack(webpackClientConfig);
+        hotMiddleware = webpackHotMiddleware(compiler, {
+            log: false,
+            heartbeat: 2500,
+        });
+
+        compiler.hooks.done.tap('done', stats => {
+            logStats('Renderer', stats);
+        });
+
+        const server = new WebpackDevServer(compiler, {
+            contentBase: paths.rootPath,
+            quiet: true,
+            before(app: any, ctx: any) {
+                app.use(hotMiddleware);
+                ctx.middleware.waitUntilValid(() => {
+                    resolve();
+                });
+            },
+        });
+
+        server.listen(1212);
+    });
+}
 
 export function startMain() {
     return new Promise((resolve, reject) => {
@@ -79,6 +129,16 @@ function electronLog(data: any, color: string) {
     }
 }
 
-startMain().then(() => {
-    startElectron();
-});
+function init() {
+    greeting();
+
+    Promise.all([startRenderer(), startMain()])
+        .then(() => {
+            startElectron();
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
+init();

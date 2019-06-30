@@ -119,12 +119,10 @@ const webpackConfig: webpack.Configuration = {
     devtool: env.isDev ? 'inline-source-map' : 'source-map',
     entry: {
         renderer: path.resolve(paths.rendererPath, './index.tsx'),
-        vendor: ['react', 'react-dom', 'react-redux', 'react-router'],
     },
     output: {
         filename: '[name].js',
-        path: path.join(paths.rootPath, './dist'),
-        publicPath: '/assets/',
+        path: path.resolve(paths.rootPath, './dist'),
     },
     resolve: {
         alias: {
@@ -134,6 +132,11 @@ const webpackConfig: webpack.Configuration = {
     },
     module: {
         rules,
+    },
+    stats: 'minimal',
+    node: {
+        __dirname: false,
+        __filename: false,
     },
 };
 

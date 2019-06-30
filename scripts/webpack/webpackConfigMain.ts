@@ -24,10 +24,15 @@ const webpackConfig: webpack.Configuration = {
         main: path.resolve(paths.mainPath, 'index.ts'),
     },
     resolve: {
-        extensions: ['.ts'],
+        extensions: ['.ts', '.tsx', '.js'],
     },
     module: {
         rules,
+    },
+    stats: 'minimal',
+    node: {
+        __dirname: false,
+        __filename: false,
     },
 };
 
