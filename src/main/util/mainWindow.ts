@@ -1,66 +1,66 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import { ResourcesDirectory, Env } from './env';
-import { config } from '../../shared/config';
-import windowStyles from '../../shared/windowStyles';
+import { app, BrowserWindow, ipcMain } from 'electron'
+import { ResourcesDirectory, Env } from './env'
+import { config } from '../../shared/config'
+import windowStyles from '../../shared/windowStyles'
 
-let mainWindow: BrowserWindow | null = null;
-const resourcesDirectory: ResourcesDirectory = new ResourcesDirectory();
+let mainWindow: BrowserWindow | null = null
+const resourcesDirectory: ResourcesDirectory = new ResourcesDirectory()
 
 export class ElectronWindow {
-    private static instance: ElectronWindow;
+    private static instance: ElectronWindow
 
     static getInstance(): ElectronWindow {
         if (!this.instance) {
-            this.instance = new ElectronWindow();
+            this.instance = new ElectronWindow()
         }
-        return this.instance;
+        return this.instance
     }
 
     public init() {
-        this.baseEnvironment();
-        this.bindEvents();
+        this.baseEnvironment()
+        this.bindEvents()
     }
 
     public getBrowserWindow() {
-        return mainWindow;
+        return mainWindow
     }
 
     private baseEnvironment() {
-        app.on('ready', this.createWindow);
+        app.on('ready', this.createWindow)
         app.on('window-all-closed', () => {
             if (process.platform !== 'darwin') {
-                app.quit();
+                app.quit()
             }
-        });
+        })
         app.on('activate', () => {
             if (mainWindow === null) {
-                this.createWindow();
+                this.createWindow()
             }
-        });
+        })
     }
 
     private bindEvents() {
         // window
         ipcMain.on('closeWindow', () => {
-            if (!mainWindow) return;
-            mainWindow.close();
-        });
+            if (!mainWindow) return
+            mainWindow.close()
+        })
 
         ipcMain.on('minimizeWindow', () => {
-            if (!mainWindow) return;
-            mainWindow.minimize();
-        });
+            if (!mainWindow) return
+            mainWindow.minimize()
+        })
 
         ipcMain.on('fullScreenWindow', (event: any, isFullScreen: any) => {
-            if (!mainWindow) return;
-            mainWindow.setKiosk(isFullScreen);
-        });
+            if (!mainWindow) return
+            mainWindow.setKiosk(isFullScreen)
+        })
 
         // isWindowTop
         ipcMain.on('setAlwaysOnTop', (event: any, isPushpin: boolean) => {
-            if (!mainWindow) return;
-            mainWindow.setAlwaysOnTop(isPushpin);
-        });
+            if (!mainWindow) return
+            mainWindow.setAlwaysOnTop(isPushpin)
+        })
     }
 
     private createWindow() {
@@ -93,29 +93,29 @@ export class ElectronWindow {
             autoHideMenuBar: true,
             titleBarStyle: 'hiddenInset',
             frame: false,
-        });
+        })
 
-        mainWindow.loadURL(resourcesDirectory.getIndexURL());
+        mainWindow.loadURL(resourcesDirectory.getIndexURL())
 
         if (Env.isDev()) {
-            mainWindow.webContents.openDevTools();
+            mainWindow.webContents.openDevTools()
         }
 
         mainWindow.once('ready-to-show', () => {
             if (!mainWindow) {
-                throw new Error('"mainWindow" is not defined');
+                throw new Error('"mainWindow" is not defined')
             }
 
             if (config.START_MINIMIZED) {
-                mainWindow.minimize();
+                mainWindow.minimize()
             } else {
-                mainWindow.show();
-                mainWindow.focus();
+                mainWindow.show()
+                mainWindow.focus()
             }
-        });
+        })
 
         mainWindow.on('closed', () => {
-            mainWindow = null;
-        });
+            mainWindow = null
+        })
     }
 }

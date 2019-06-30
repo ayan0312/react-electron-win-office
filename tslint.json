@@ -10,6 +10,7 @@
     "variable-name": [true, "allow-pascal-case"],
     "strict-boolean-expressions": false,
     "import-name": false,
-    "prettier": true
+    "prettier": true,
+    "type-literal-delimiter": false
   }
 }

@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './TimerMenu.scss';
+import styles from './TimerMenu.scss'
 
-import TimerSetting from '../TimerSetting/TimerSetting';
+import TimerSetting from '../TimerSetting/TimerSetting'
 
-import { Drawer } from 'antd';
-import 'antd/lib/drawer/style/css';
+import { Drawer } from 'antd'
+import 'antd/lib/drawer/style/css'
 
 interface IProps {
-    onClose: React.MouseEventHandler<HTMLElement>;
-    visible: boolean;
+    onClose: React.MouseEventHandler<HTMLElement>
+    visible: boolean
 }
 
 export default class TimerMenu extends React.Component<IProps> {
@@ -33,65 +33,65 @@ export default class TimerMenu extends React.Component<IProps> {
         currentSettingName: '',
         visible: false,
         prevSelectElement: null,
-    };
+    }
 
     private showCurrentSetting() {
         return (e: any) => {
-            const { prevSelectElement } = this.state;
-            const name = e.currentTarget.getAttribute('data-name');
+            const { prevSelectElement } = this.state
+            const name = e.currentTarget.getAttribute('data-name')
 
             if (prevSelectElement !== null && prevSelectElement !== e.currentTarget) {
-                prevSelectElement.classList.remove(styles.current);
+                prevSelectElement.classList.remove(styles.current)
             }
 
-            e.currentTarget.classList.add(styles.current);
+            e.currentTarget.classList.add(styles.current)
 
             this.setState({
                 currentSettingName: name,
                 prevSelectElement: e.currentTarget,
                 visible: true,
-            });
-        };
+            })
+        }
     }
 
     private onClose = () => {
-        const { prevSelectElement } = this.state;
-        prevSelectElement.classList.remove(styles.current);
+        const { prevSelectElement } = this.state
+        prevSelectElement.classList.remove(styles.current)
 
         this.setState({
             visible: false,
-        });
-    };
+        })
+    }
 
     public render() {
-        const { presetNames } = this.state;
+        const { presetNames } = this.state
 
         const options = Object.keys(presetNames).map((presetKey: string) => {
-            const currentOptions = presetNames[presetKey];
+            const currentOptions = presetNames[presetKey]
             const optionsList = Object.keys(currentOptions).map((optionsKey: string) => (
                 <li key={optionsKey} data-name={optionsKey} onClick={this.showCurrentSetting()}>
                     <span>{currentOptions[optionsKey]}</span>
                 </li>
-            ));
+            ))
 
             const optionsTitle = (presetKey: string) => {
                 switch (presetKey) {
                     case 'options':
-                        return '选项';
+                        return '选项'
                     case 'advancedOptions':
-                        return '高级选项';
+                        return '高级选项'
                     case 'about':
-                        return '关于';
+                        return '关于'
                 }
-            };
+            }
 
             return (
                 <div key={presetKey}>
                     <h4>{optionsTitle(presetKey)}</h4>
                     <ul>{optionsList}</ul>
                 </div>
-            );
-        });
+            )
+        })
 
         return (
             <Drawer
@@ -110,6 +110,6 @@ export default class TimerMenu extends React.Component<IProps> {
                     visible={this.state.visible}
                 />
             </Drawer>
-        );
+        )
     }
 }

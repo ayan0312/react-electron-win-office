@@ -1,16 +1,16 @@
-import path from 'path';
-import webpack from 'webpack';
+import path from 'path'
+import webpack from 'webpack'
 
-import paths from '../utils/paths';
-import env from '../utils/env';
+import paths from '../utils/paths'
+import env from '../utils/env'
 
-const rules: Array<any> = [];
+const rules: Array<any> = []
 
 rules.push({
     test: /\.tsx?$/,
     loader: 'ts-loader',
     exclude: /node_modules/,
-});
+})
 
 const webpackConfig: webpack.Configuration = {
     mode: env.isDev ? 'development' : 'production',
@@ -34,6 +34,6 @@ const webpackConfig: webpack.Configuration = {
         __dirname: false,
         __filename: false,
     },
-};
+}
 
-export default webpackConfig;
+export default webpackConfig

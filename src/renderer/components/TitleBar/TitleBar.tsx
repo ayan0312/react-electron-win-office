@@ -1,66 +1,66 @@
-import React from 'react';
-import cx from 'classnames';
+import React from 'react'
+import cx from 'classnames'
 
-import styles from './TitleBar.scss';
-import { ipcRenderer } from 'electron';
+import styles from './TitleBar.scss'
+import { ipcRenderer } from 'electron'
 
-import { Popconfirm, Icon } from 'antd';
-import 'antd/lib/popconfirm/style/css';
+import { Popconfirm, Icon } from 'antd'
+import 'antd/lib/popconfirm/style/css'
 
 interface IProps {
-    onClick?: (e: any) => {};
-    [x: string]: any;
+    onClick?: (e: any) => {}
+    [x: string]: any
 }
 
 class TitleBar extends React.Component<IProps> {
     public state = {
         isPushpin: false,
         isFullScreen: false,
-    };
+    }
 
     private isState(state: any, changeState: any) {
-        const nowState = !changeState;
+        const nowState = !changeState
 
         this.setState({
             [state]: nowState,
-        });
+        })
 
-        return nowState;
+        return nowState
     }
 
     private pushpinChange() {
-        const { onClick = () => {} } = this.props;
+        const { onClick = () => {} } = this.props
         const pushpinClick = (e: any) => {
-            const isPushpin = this.isState('isPushpin', this.state.isPushpin);
-            ipcRenderer.send('setAlwaysOnTop', isPushpin);
-            onClick(e);
-        };
-        return pushpinClick;
+            const isPushpin = this.isState('isPushpin', this.state.isPushpin)
+            ipcRenderer.send('setAlwaysOnTop', isPushpin)
+            onClick(e)
+        }
+        return pushpinClick
     }
 
     private closeWindow() {
         return (e: any) => {
-            ipcRenderer.send('closeWindow');
-        };
+            ipcRenderer.send('closeWindow')
+        }
     }
 
     private minimizeWindow() {
         return (e: any) => {
-            ipcRenderer.send('minimizeWindow');
-        };
+            ipcRenderer.send('minimizeWindow')
+        }
     }
 
     private fullScreenWindow() {
         return () => {
-            const isFullScreen = this.isState('isFullScreen', this.state.isFullScreen);
-            ipcRenderer.send('fullScreenWindow', isFullScreen);
-        };
+            const isFullScreen = this.isState('isFullScreen', this.state.isFullScreen)
+            ipcRenderer.send('fullScreenWindow', isFullScreen)
+        }
     }
 
     public render() {
-        const { ...props } = this.props;
+        const { ...props } = this.props
 
-        ipcRenderer.send('setAlwaysOnTop', this.state.isPushpin);
+        ipcRenderer.send('setAlwaysOnTop', this.state.isPushpin)
 
         return (
             <div className={styles.component} {...props}>
@@ -97,8 +97,8 @@ class TitleBar extends React.Component<IProps> {
                     <Icon type="pushpin" theme="filled" />
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default TitleBar;
+export default TitleBar

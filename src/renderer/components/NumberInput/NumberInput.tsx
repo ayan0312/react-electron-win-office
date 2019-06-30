@@ -1,17 +1,17 @@
-import React from 'react';
-import cx from 'classnames';
+import React from 'react'
+import cx from 'classnames'
 
-import styles from './NumberInput.scss';
+import styles from './NumberInput.scss'
 
 interface IProps {
-    zIndex?: number;
-    className?: string;
-    [x: string]: any;
+    zIndex?: number
+    className?: string
+    [x: string]: any
 }
 
 class NumberInput extends React.Component<IProps> {
     render() {
-        const { className = '', ...props } = this.props;
+        const { className = '', ...props } = this.props
 
         return (
             <input
@@ -21,8 +21,8 @@ class NumberInput extends React.Component<IProps> {
                 type="number"
                 {...props}
             />
-        );
+        )
     }
 }
 
-export default NumberInput;
+export default NumberInput

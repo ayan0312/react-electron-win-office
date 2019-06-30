@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './Timer.scss';
+import styles from './Timer.scss'
 
-import Button from '../../components/Button/Button';
-import NumberInput from '../../components/NumberInput/NumberInput';
-import TimerMenu from './components/TimerMenu/TimerMenu';
+import Button from '../../components/Button/Button'
+import NumberInput from '../../components/NumberInput/NumberInput'
+import TimerMenu from './components/TimerMenu/TimerMenu'
 
 interface IPrors {}
 
@@ -13,30 +13,30 @@ class Timer extends React.Component<IPrors> {
         workTime: 25,
         restTime: 5,
         visible: false,
-    };
+    }
 
     public showDrawer = () => {
         this.setState({
             visible: true,
-        });
-    };
+        })
+    }
 
     public onClose = () => {
         this.setState({
             visible: false,
-        });
-    };
+        })
+    }
 
     public workChange() {
         return (event: any) => {
-            this.setState({ workTime: event.target.value });
-        };
+            this.setState({ workTime: event.target.value })
+        }
     }
 
     public restChange() {
         return (event: any) => {
-            this.setState({ restTime: event.target.value });
-        };
+            this.setState({ restTime: event.target.value })
+        }
     }
 
     render() {
@@ -64,8 +64,8 @@ class Timer extends React.Component<IPrors> {
                 </div>
                 <TimerMenu onClose={this.onClose} visible={this.state.visible} />
             </div>
-        );
+        )
     }
 }
 
-export default Timer;
+export default Timer

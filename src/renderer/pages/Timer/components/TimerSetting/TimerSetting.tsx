@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './TimerSetting.scss';
+import styles from './TimerSetting.scss'
 
 import {
     Developer,
@@ -11,36 +11,36 @@ import {
     MoreSetting,
     SetPlan,
     Sponsor,
-} from './components/index';
+} from './components/index'
 
-import { Drawer, Form } from 'antd';
-import 'antd/lib/drawer/style/css';
+import { Drawer, Form } from 'antd'
+import 'antd/lib/drawer/style/css'
 
 interface IPrors {
-    settingName: string;
-    visible: boolean;
-    onClose: React.MouseEventHandler<HTMLElement>;
+    settingName: string
+    visible: boolean
+    onClose: React.MouseEventHandler<HTMLElement>
 }
 
 export default class TimerSetting extends React.Component<IPrors> {
     private selectSetting(selectOptionsName: string) {
         switch (selectOptionsName) {
             case 'setPlan':
-                return <SetPlan age={1} name={'2'} />;
+                return <SetPlan age={1} name={'2'} />
             case 'historyPlan':
-                return <HistoryPlan />;
+                return <HistoryPlan />
             case 'export':
-                return <Export />;
+                return <Export />
             case 'import':
-                return <Import />;
+                return <Import />
             case 'moreSetting':
-                return <MoreSetting />;
+                return <MoreSetting />
             case 'help':
-                return <Help />;
+                return <Help />
             case 'sponsor':
-                return <Sponsor />;
+                return <Sponsor />
             case 'developer':
-                return <Developer />;
+                return <Developer />
         }
     }
 
@@ -59,6 +59,6 @@ export default class TimerSetting extends React.Component<IPrors> {
                     {this.selectSetting(this.props.settingName)}
                 </Drawer>
             </div>
-        );
+        )
     }
 }

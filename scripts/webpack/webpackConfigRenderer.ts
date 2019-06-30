@@ -1,23 +1,23 @@
-import path from 'path';
-import webpack from 'webpack';
+import path from 'path'
+import webpack from 'webpack'
 
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-import paths from '../utils/paths';
-import env from '../utils/env';
+import paths from '../utils/paths'
+import env from '../utils/env'
 
 const getStyleLoaders = (loaders: any) => {
-    return [env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader].concat(loaders);
-};
+    return [env.isDev ? 'style-loader' : MiniCssExtractPlugin.loader].concat(loaders)
+}
 
-const rules: Array<any> = [];
+const rules: Array<any> = []
 
 rules.push({
     test: /\.tsx?$/,
     loader: 'ts-loader',
     exclude: /node_modules/,
-});
+})
 
 rules.push({
     test: /\.scss/,
@@ -45,7 +45,7 @@ rules.push({
             },
         },
     ]),
-});
+})
 
 rules.push({
     test: /\.css/,
@@ -57,12 +57,12 @@ rules.push({
             },
         },
     ]),
-});
+})
 
 rules.push({
     test: /\.svg$/,
     loader: 'svg-inline-loader',
-});
+})
 
 rules.push({
     test: /\.(ico|jpg|jpeg|png|gif)(\?.*)?$/,
@@ -74,7 +74,7 @@ rules.push({
             },
         },
     ],
-});
+})
 
 rules.push({
     test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
@@ -84,9 +84,9 @@ rules.push({
             limit: 10000,
         },
     },
-});
+})
 
-const plugins: Array<any> = [];
+const plugins: Array<any> = []
 
 if (env.isProd) {
     plugins.push(
@@ -108,7 +108,7 @@ if (env.isProd) {
             filename: '[name].css',
             chunkFilename: '[id].css',
         }),
-    );
+    )
 }
 
 const webpackConfig: webpack.Configuration = {
@@ -138,6 +138,6 @@ const webpackConfig: webpack.Configuration = {
         __dirname: false,
         __filename: false,
     },
-};
+}
 
-export default webpackConfig;
+export default webpackConfig

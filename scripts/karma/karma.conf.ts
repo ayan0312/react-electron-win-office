@@ -27,9 +27,9 @@ export default (config: any) => {
         reporters: ['coverage', 'karma-typescript'],
         browsers: (() => {
             if (process.env.BROWSER) {
-                return [process.env.BROWSER];
+                return [process.env.BROWSER]
             }
-            return ['ChromeHeadless'];
+            return ['ChromeHeadless']
         })(),
         port: 9876,
         colors: true,
@@ -45,7 +45,7 @@ export default (config: any) => {
                 target: 'ES5',
             },
         },
-    };
+    }
 
-    config.set(configuration);
-};
+    config.set(configuration)
+}

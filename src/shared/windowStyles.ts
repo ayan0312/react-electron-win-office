@@ -6,4 +6,4 @@ export default {
     MIN_WIDTH: 350,
     MIN_HEIGHT: 650,
     BACKGROUND_COLOR: '#efefef',
-};
+}

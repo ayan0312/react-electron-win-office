@@ -1,34 +1,34 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './SetPlan.scss';
+import styles from './SetPlan.scss'
 
-import { DatePicker, Form } from 'antd';
-import { FormComponentProps } from 'antd/lib/form';
-import 'antd/lib/date-picker/style/css';
+import { DatePicker, Form } from 'antd'
+import { FormComponentProps } from 'antd/lib/form'
+import 'antd/lib/date-picker/style/css'
 
 interface UserFormProps extends FormComponentProps {
-    age: number;
-    name: string;
+    age: number
+    name: string
 }
 
 class SetPlan extends React.Component<UserFormProps, any> {
-    public onChange = (date: any, dateString: any) => {};
+    public onChange = (date: any, dateString: any) => {}
 
     handleSubmit = (e: any) => {
-        e.preventDefault();
+        e.preventDefault()
         this.props.form.validateFields((err: any, values: any) => {
             if (err) {
-                return;
+                return
             }
-        });
-    };
+        })
+    }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator } = this.props.form
 
         const config = {
             rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-        };
+        }
 
         return (
             <div className={styles.component}>
@@ -87,9 +87,9 @@ class SetPlan extends React.Component<UserFormProps, any> {
                     </div>
                 </Form>
             </div>
-        );
+        )
     }
 }
-const App = Form.create<UserFormProps>({})(SetPlan);
+const App = Form.create<UserFormProps>({})(SetPlan)
 
-export default App;
+export default App

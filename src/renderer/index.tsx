@@ -1,11 +1,11 @@
-import React from 'react';
-import * as ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import React from 'react'
+import * as ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 
-import Root from '@/components/Root/Root';
+import Root from '@/components/Root/Root'
 
-import store from '@/store/configureStore';
-import './index.css';
+import store from '@/store/configureStore'
+import './index.css'
 
 const render = (Component: any) => {
     ReactDOM.render(
@@ -13,7 +13,7 @@ const render = (Component: any) => {
             <Component store={store} />
         </AppContainer>,
         document.getElementById('root'),
-    );
-};
+    )
+}
 
-render(Root);
+render(Root)

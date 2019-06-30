@@ -1,11 +1,11 @@
-import React from 'react';
-import styles from './index.scss';
+import React from 'react'
+import styles from './index.scss'
 
-import Timer from './Timer/Timer';
+import Timer from './Timer/Timer'
 
-import Square from '../components/Square/Square';
-import TitleBar from '../components/TitleBar/TitleBar';
-import Drag from '../components/Drag/Drag';
+import Square from '../components/Square/Square'
+import TitleBar from '../components/TitleBar/TitleBar'
+import Drag from '../components/Drag/Drag'
 
 export default () => {
     return (
@@ -15,5 +15,5 @@ export default () => {
             <Drag />
             <Square zIndex={19} />
         </div>
-    );
-};
+    )
+}

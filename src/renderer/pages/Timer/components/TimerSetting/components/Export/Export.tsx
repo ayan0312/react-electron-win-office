@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './Export.scss';
+import styles from './Export.scss'
 
 interface IProps {}
 
@@ -10,6 +10,6 @@ export default class Export extends React.Component<IProps> {
             <div className={styles.component}>
                 <h4>导出数据</h4>
             </div>
-        );
+        )
     }
 }

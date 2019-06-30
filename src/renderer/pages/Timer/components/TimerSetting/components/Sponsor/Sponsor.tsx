@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './Sponsor.scss';
+import styles from './Sponsor.scss'
 
 interface IProps {}
 
@@ -10,6 +10,6 @@ export default class Sponsor extends React.Component<IProps> {
             <div className={styles.component}>
                 <h4>赞助</h4>
             </div>
-        );
+        )
     }
 }

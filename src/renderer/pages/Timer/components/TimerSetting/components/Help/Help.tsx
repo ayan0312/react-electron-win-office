@@ -1,20 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './Help.scss';
+import styles from './Help.scss'
 
-import { shell } from 'electron';
+import { shell } from 'electron'
 
-import { Tooltip } from 'antd';
-import 'antd/lib/tooltip/style/css';
+import { Tooltip } from 'antd'
+import 'antd/lib/tooltip/style/css'
 
 interface IProps {}
 
 export default class Help extends React.Component<IProps> {
     private skip(href: string) {
-        const hrefLocal = href;
+        const hrefLocal = href
         return (e: any) => {
-            shell.openExternal(hrefLocal);
-        };
+            shell.openExternal(hrefLocal)
+        }
     }
 
     render() {
@@ -64,6 +64,6 @@ export default class Help extends React.Component<IProps> {
                     <strong>导入数据或导出数据</strong>来导入或导出历史计划和设置好的计划
                 </p>
             </div>
-        );
+        )
     }
 }
