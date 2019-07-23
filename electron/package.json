@@ -1,0 +1,53 @@
+{
+  "name": "pomodoro",
+  "version": "0.2.2",
+  "main": "dist/main.js",
+  "scripts": {
+    "release": "npm run clean:release && cross-env NODE_ENV=production electron-builder build --win",
+    "clean:release": "rimraf ./release",
+    "publish": "cross-env NODE_ENV=production electron-builder build --win --publish always"
+  },
+  "productName": "Pomodoro",
+  "build": {
+    "appId": "com.github.ayan0312.pomodoro",
+    "asar": true,
+    "directories": {
+      "output": "./release"
+    },
+    "files": [
+      "dist",
+      "package.json"
+    ],
+    "win": {
+      "icon": "resources/icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "perMachine": false,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "include": "resources/windows/installer.nsh"
+    }
+  },
+  "private": true,
+  "author": {
+    "name": "ayan0312",
+    "email": "ayan0312@outlook.com"
+  },
+  "repository": "https://github.com/ayan0312/pomodoro",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "electron": "^5.0.4",
+    "electron-builder": "^20.43.0",
+    "rimraf": "^2.6.3"
+  }
+}

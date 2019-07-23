@@ -1,11 +1,6 @@
-node_modules
+release
 dist
-.*_cache*
-coverage
+node_modules
 .idea
 .vs
-release
-package-lock.json
-yarn-error.log
-test
-tests
+coverage
