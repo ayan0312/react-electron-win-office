@@ -1,8 +1,0 @@
-{
-  "name": "pomodoro",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:ayan0312/pomodoro.git",
-  "author": "ayan0312 <ayan0312000@outlook.com>",
-  "license": "MIT"
-}
