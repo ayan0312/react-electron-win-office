@@ -113,7 +113,6 @@ if (env.isProd) {
 
 const webpackConfig: webpack.Configuration = {
     plugins,
-    cache: false,
     mode: env.isDev ? 'development' : 'production',
     target: 'electron-renderer',
     devtool: env.isDev ? 'inline-source-map' : 'source-map',
@@ -133,7 +132,7 @@ const webpackConfig: webpack.Configuration = {
     module: {
         rules,
     },
-    stats: 'minimal',
+    cache: false,    
     node: {
         __dirname: false,
         __filename: false,

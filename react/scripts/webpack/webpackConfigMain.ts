@@ -29,7 +29,6 @@ const webpackConfig: webpack.Configuration = {
     module: {
         rules,
     },
-    stats: 'minimal',
     node: {
         __dirname: false,
         __filename: false,

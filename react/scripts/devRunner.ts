@@ -62,7 +62,7 @@ function startRenderer() {
     })
 }
 
-export function startMain() {
+function startMain() {
     return new Promise((resolve, reject) => {
         const compiler = webpack(webpackConfigMain)
 
@@ -95,7 +95,7 @@ export function startMain() {
     })
 }
 
-export function startElectron() {
+function startElectron() {
     const args = ['--inspect=5858', path.resolve(paths.rootPath, './dist/main.js')]
 
     electronProcess = spawn(String(electron), args)
@@ -129,8 +129,8 @@ function electronLog(data: any, color: string) {
     }
 }
 
-function init() {
-    greeting()
+function devRunner() {
+    greeting('Pomodoro Dev')
 
     Promise.all([startRenderer(), startMain()])
         .then(() => {
@@ -141,4 +141,4 @@ function init() {
         })
 }
 
-init()
+devRunner()

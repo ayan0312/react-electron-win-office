@@ -8,15 +8,15 @@ import webpackConfigRenderer from './webpack/webpackConfigRenderer'
 
 async function build() {
     const errorLog = `${chalk.bgRed.white(' ERROR ')}  `
-    greeting()
+    greeting('Pomodoro Building')
 
-    pack('Main', webpackConfigMain).catch(err => {
+    await pack('Main', webpackConfigMain).catch(err => {
         console.log(`\n  ${errorLog}failed to build main process`)
         console.error(`\n${err}\n`)
         process.exit(1)
     })
 
-    pack('Renderer', webpackConfigRenderer).catch(err => {
+    await pack('Renderer', webpackConfigRenderer).catch(err => {
         console.log(`\n  ${errorLog}failed to build renderer process`)
         console.error(`\n${err}\n`)
         process.exit(1)
@@ -25,21 +25,10 @@ async function build() {
 
 function pack(type: string, config: webpack.Configuration) {
     return new Promise((resolve, reject) => {
-        webpack(config, (err, stats) => {
+        const compiler = webpack(config)
+        compiler.run((err, stats) => {
             if (err) reject(err.stack || err)
             else if (stats.hasErrors()) {
-                let err = ''
-
-                stats
-                    .toString({
-                        chunks: false,
-                        colors: true,
-                    })
-                    .split(/\r?\n/)
-                    .forEach(line => {
-                        err += `    ${line}\n`
-                    })
-
                 reject(err)
             } else {
                 logStats(type, stats)
