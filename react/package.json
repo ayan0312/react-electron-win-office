@@ -1,6 +1,6 @@
 {
-  "name": "pomodoro-react",
-  "version": "0.0.1",
+  "name": "react-office",
+  "version": "1.0.0",
   "scripts": {
     "build": "cross-env NODE_ENV=production ts-node --project ./scripts/tsconfig.json ./scripts/build.ts",
     "dev": "cross-env NODE_ENV=development ts-node --project ./scripts/tsconfig.json ./scripts/devRunner.ts",
@@ -93,7 +93,8 @@
     "webpack-hot-middleware": "^2.24.0"
   },
   "dependencies": {
-    "antd": "^3.19.5",
+    "@uifabric/fluent-theme": "^7.1.2",
+    "office-ui-fabric-react": "^7.25.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",

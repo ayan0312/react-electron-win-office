@@ -92,7 +92,7 @@ if (env.isProd) {
     plugins.push(
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: path.resolve(paths.rootPath, './src/renderer/index.html'),
+            template: path.resolve(paths.rendererPath, 'index.html'),
             minify: {
                 collapseWhitespace: true,
                 removeAttributeQuotes: true,
@@ -113,7 +113,6 @@ if (env.isProd) {
 
 const webpackConfig: webpack.Configuration = {
     plugins,
-    cache: false,
     mode: env.isDev ? 'development' : 'production',
     target: 'electron-renderer',
     devtool: env.isDev ? 'inline-source-map' : 'source-map',
@@ -132,11 +131,6 @@ const webpackConfig: webpack.Configuration = {
     },
     module: {
         rules,
-    },
-    stats: 'minimal',
-    node: {
-        __dirname: false,
-        __filename: false,
     },
 }
 

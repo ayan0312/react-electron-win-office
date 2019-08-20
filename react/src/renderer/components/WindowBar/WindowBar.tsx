@@ -1,11 +1,10 @@
 import React from 'react'
 import cx from 'classnames'
 
-import styles from './TitleBar.scss'
+import styles from './WindowBar.scss'
 import { ipcRenderer } from 'electron'
-
-import { Popconfirm, Icon } from 'antd'
-import 'antd/lib/popconfirm/style/css'
+import { DefaultButton } from 'office-ui-fabric-react/lib/components/Button/DefaultButton/DefaultButton'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 interface IProps {
     onClick?: (e: any) => {}
@@ -64,24 +63,12 @@ class TitleBar extends React.Component<IProps> {
 
         return (
             <div className={styles.component} {...props}>
-                <Popconfirm
-                    placement="bottomRight"
-                    title={'确定退出番茄工作法吗？'}
-                    onConfirm={this.closeWindow()}
-                    okText="退出"
-                    cancelText="取消"
-                >
-                    <div className={styles.button}>
-                        <Icon type="close" />
-                    </div>
-                </Popconfirm>
-
                 <div className={styles.button} onClick={this.fullScreenWindow()}>
-                    {this.state.isFullScreen ? (
-                        <Icon type="fullscreen-exit" />
-                    ) : (
-                        <Icon type="fullscreen" />
-                    )}
+                    <DefaultButton
+                        data-automation-id="test"
+                        allowDisabledFocus={true}
+                        iconProps={{ iconName: 'Cancel' }}
+                    />
                 </div>
 
                 <div
@@ -89,7 +76,7 @@ class TitleBar extends React.Component<IProps> {
                     onClick={this.minimizeWindow()}
                     style={this.state.isFullScreen ? { display: 'none' } : { display: 'block' }}
                 >
-                    <Icon type="minus" />
+                    <Icon iconName="Cancel" className="ms-IconExample" />
                 </div>
 
                 <div
@@ -98,9 +85,7 @@ class TitleBar extends React.Component<IProps> {
                     })}
                     onClick={this.pushpinChange()}
                     style={this.state.isFullScreen ? { display: 'none' } : { display: 'block' }}
-                >
-                    <Icon type="pushpin" theme="filled" />
-                </div>
+                ></div>
             </div>
         )
     }

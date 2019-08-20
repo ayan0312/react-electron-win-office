@@ -1,24 +1,14 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { Store } from 'redux'
+import TitleBar from '@/components/WindowBar/WindowBar'
+import { ChoiceGroupIconExample } from '@/pages/index'
 
-import Pages from '@/pages'
-
-interface IProps {
-    store: Store
-}
-
-class Root extends React.Component<IProps> {
-    constructor(props: any) {
-        super(props)
-    }
-
+class Root extends React.Component {
     public render() {
-        const { store } = this.props
         return (
-            <Provider store={store}>
-                <Pages />
-            </Provider>
+            <div>
+                <TitleBar />
+                <ChoiceGroupIconExample />
+            </div>
         )
     }
 }

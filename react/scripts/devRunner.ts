@@ -27,7 +27,7 @@ function startRenderer() {
         webpackClientConfig.plugins.push(
             new HtmlWebpackPlugin({
                 filename: 'index.html',
-                template: path.resolve(paths.rootPath, './src/index.html'),
+                template: path.resolve(paths.rendererPath, 'index.html'),
                 minify: {
                     collapseWhitespace: true,
                     removeAttributeQuotes: true,
@@ -96,7 +96,7 @@ export function startMain() {
 }
 
 export function startElectron() {
-    const args = ['--inspect=5858', path.resolve(paths.rootPath, './dist/main.js')]
+    const args = ['--inspect=5858', path.resolve(paths.rootPath, '../electron/dist/main.js')]
 
     electronProcess = spawn(String(electron), args)
 

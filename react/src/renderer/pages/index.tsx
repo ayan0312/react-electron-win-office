@@ -1,19 +1,29 @@
-import React from 'react'
-import styles from './index.scss'
+import * as React from 'react'
+import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 
-import Timer from './Timer/Timer'
-
-import Square from '@/components/Square/Square'
-import TitleBar from '@/components/TitleBar/TitleBar'
-import Drag from '@/components/Drag/Drag'
-
-export default () => {
+export const ChoiceGroupIconExample: React.FunctionComponent = () => {
     return (
-        <div className={styles.component}>
-            <TitleBar />
-            <Timer />
-            <Drag />
-            <Square zIndex={19} />
-        </div>
+        <ChoiceGroup
+            label="Pick one icon"
+            defaultSelectedKey="day"
+            options={[
+                {
+                    key: 'day',
+                    iconProps: { iconName: 'CalendarDay' },
+                    text: 'Day',
+                },
+                {
+                    key: 'week',
+                    iconProps: { iconName: 'CalendarWeek' },
+                    text: 'Week',
+                },
+                {
+                    key: 'month',
+                    iconProps: { iconName: 'Calendar' },
+                    text: 'Month',
+                    disabled: true,
+                },
+            ]}
+        />
     )
 }
