@@ -1,5 +1,2 @@
-# Pomodoro
-:tomato:番茄工作法
-
-# License
-MIT
+# react-electron-win-office
+a boilerplate
