@@ -96,7 +96,7 @@ export function startMain() {
 }
 
 export function startElectron() {
-    const args = ['--inspect=5858', path.resolve(paths.rootPath, '../electron/dist/main.js')]
+    const args = ['--inspect=5858', path.resolve(paths.rootPath, 'dist/main.js')]
 
     electronProcess = spawn(String(electron), args)
 

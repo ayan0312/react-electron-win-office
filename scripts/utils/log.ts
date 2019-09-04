@@ -9,7 +9,7 @@ export function logStats(proc: string, data: any) {
     logs2.length = 28 + 1
 
     log += chalk.yellow.bold(`┏ ${proc} Process ${logs1.join('-')}`)
-    log += '\n\n'
+    log += '\n'
 
     if (typeof data === 'object') {
         data.toString({
@@ -24,12 +24,9 @@ export function logStats(proc: string, data: any) {
         log += `  ${data}\n`
     }
 
-    log += `\n${chalk.yellow.bold(`┗ ${logs2.join('-')}`)}\n`
+    log += `${chalk.yellow.bold(`┗ ${logs2.join('-')}`)}\n`
 
     console.log(log)
 }
 
-export function greeting() {
-    console.log(chalk.yellow.bold('\n  Pomodoro'))
-    console.log(`${chalk.blue('  ready...')}\n`)
-}
+export function greeting() {}

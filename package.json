@@ -1,6 +1,7 @@
 {
-  "name": "react-office",
-  "version": "1.0.0",
+  "name": "react-electron-win-office",
+  "version": "1.0.1",
+  "main": "dist/main.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production ts-node --project ./scripts/tsconfig.json ./scripts/build.ts",
     "dev": "cross-env NODE_ENV=development ts-node --project ./scripts/tsconfig.json ./scripts/devRunner.ts",
@@ -12,7 +13,9 @@
     "fix": "npm-run-all fix:*",
     "fix:ts": "npm run lint:ts -- --fix",
     "fix:prettier": "prettier \"{src/**/*,scripts/**/*,test/**/*}.{js,jsx,ts,tsx,css}\" --write",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "release": "npm run clean:release && cross-env NODE_ENV=production electron-builder build --win",
+    "clean:release": "rimraf ./release"
   },
   "lint-staged": {
     "linters": {
@@ -30,6 +33,36 @@
     "hooks": {
       "post-commit": "git reset",
       "pre-commit": "lint-staged"
+    }
+  },
+  "productName": "electron-win",
+  "build": {
+    "appId": "electron-win",
+    "asar": true,
+    "directories": {
+      "output": "./release"
+    },
+    "files": [
+      "dist",
+      "package.json"
+    ],
+    "win": {
+      "icon": "resources/icons/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "perMachine": false,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "include": "resources/windows/installer.nsh"
     }
   },
   "devDependencies": {
@@ -50,6 +83,7 @@
     "@types/webpack-dev-middleware": "^2.0.3",
     "@types/webpack-dev-server": "^3.1.6",
     "@types/webpack-hot-middleware": "^2.16.5",
+    "@uifabric/fluent-theme": "^7.1.4",
     "autoprefixer": "^9.6.0",
     "chai": "^4.2.0",
     "chalk": "^2.4.2",
@@ -59,6 +93,7 @@
     "css-loader": "^2.1.1",
     "delay": "^4.3.0",
     "electron": "^5.0.7",
+    "electron-builder": "^21.2.0",
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "3.0.7",
     "husky": "2.4.1",
@@ -75,6 +110,7 @@
     "postcss-loader": "^3.0.0",
     "prettier": "1.18.2",
     "react-hot-loader": "^4.11.1",
+    "rimraf": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "svg-inline-loader": "^0.8.0",
@@ -93,18 +129,13 @@
     "webpack-hot-middleware": "^2.24.0"
   },
   "dependencies": {
-    "@uifabric/fluent-theme": "^7.1.2",
     "office-ui-fabric-react": "^7.25.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-router-redux": "^4.0.8",
-    "redux": "^4.0.1"
-  },
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "redux": "^4.0.4"
   }
 }

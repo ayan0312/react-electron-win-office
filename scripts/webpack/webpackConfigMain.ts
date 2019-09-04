@@ -17,7 +17,7 @@ const webpackConfig: webpack.Configuration = {
     target: 'electron-main',
     devtool: 'source-map',
     output: {
-        path: path.resolve(paths.rootPath, '../electron/dist'),
+        path: path.resolve(paths.rootPath, 'dist'),
         filename: 'main.js',
     },
     entry: {

@@ -120,7 +120,7 @@ const webpackConfig: webpack.Configuration = {
         renderer: path.resolve(paths.rendererPath, './index.tsx'),
     },
     output: {
-        path: path.resolve(paths.rootPath, '../electron/dist'),
+        path: path.resolve(paths.rootPath, 'dist'),
         filename: '[name].js',
     },
     resolve: {
